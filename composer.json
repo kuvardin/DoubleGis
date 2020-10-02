@@ -1,6 +1,7 @@
 {
     "name": "kuvardin/double-gis",
     "type": "library",
+    "minimum-stability": "dev",
     "authors": [
         {
             "name": "Maxim Kuvardin",
