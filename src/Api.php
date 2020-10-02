@@ -236,8 +236,8 @@ class Api
                 'User-Agent' => $this->user_agent ?? self::USER_AGENT_DEFAULT,
                 'Accept' => 'application/json, text/plain, */*',
                 'Accept-Language' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
-                'DNT' => '1',
                 'Referer' => 'https://2gis.kz/',
+                'DNT' => '1',
                 'TE' => 'Trailers',
             ],
         ]);
