@@ -1,0 +1,23 @@
+{
+    "name": "kuvardin/double-gis",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Maxim Kuvardin",
+            "email": "maxim@kuvard.in"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.0",
+      "ext-json": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kuvardin\\DoubleGis\\": "src"
+        }
+    },
+    "description": "PHP SDK for 2Gis API",
+  "require-dev": {
+    "ext-mbstring": "*"
+  }
+}
