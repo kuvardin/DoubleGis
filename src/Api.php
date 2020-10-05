@@ -224,7 +224,6 @@ class Api
         $get['key'] = $this->key;
         if ($this->params_changer !== null) {
             $get = call_user_func($this->params_changer, $url, $get);
-            echo http_build_query($get), PHP_EOL;
         }
 
         $url .= '?' . http_build_query($get);
