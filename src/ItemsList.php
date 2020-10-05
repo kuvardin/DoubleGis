@@ -34,17 +34,17 @@ class ItemsList
     /**
      * @var ContextRubric[] Массив контекстных категорий
      */
-    public array $context_rubrics;
+    public ?array $context_rubrics = null;
 
     /**
-     * @var int Тип запроса для отправки в статистику
+     * @var int|null Тип запроса для отправки в статистику
      */
-    public int $search_type;
+    public ?int $search_type;
 
     /**
-     * @var string Тип поискового запроса (self::REQUEST_TYPE_*)
+     * @var string|null Тип поискового запроса (self::REQUEST_TYPE_*)
      */
-    public string $request_type;
+    public ?string $request_type;
 
     /**
      * @var string|null Базовый хеш
@@ -72,10 +72,11 @@ class ItemsList
     {
         $this->total = $data['total'];
         $this->items = array_map(static fn($item_data) => Item::make($item_data), $data['items']);
-        $this->context_rubrics = array_map(static fn($cr_data) => new ContextRubric($cr_data),
-            $data['context_rubrics']);
-        $this->search_type = $data['search_type'];
-        $this->request_type = $data['request_type'];
+        $this->context_rubrics = isset($data['context_rubrics'])
+            ? array_map(static fn($cr_data) => new ContextRubric($cr_data), $data['context_rubrics'])
+            : null;
+        $this->search_type = $data['search_type'] ?? null;
+        $this->request_type = $data['request_type'] ?? null;
         $this->hash = $data['hash'] ?? null;
         // ...
     }

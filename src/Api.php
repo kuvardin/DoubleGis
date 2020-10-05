@@ -78,10 +78,10 @@ class Api
      * @param string|null $query Произвольная поисковая строка
      * @param int|null $page Номер запрашиваемой страницы
      * @param int|null $page_size Количество результатов поиска, выводимых на одной странице
-     * @param array|null $rubric_ids Идентификаторы категорий. Все категории должны быть из одного региона
-     * @param array|null $types Типы объектов, среди которых производится поиск. При передаче нескольких типов менее
+     * @param int[]|null $rubric_ids Идентификаторы категорий. Все категории должны быть из одного региона
+     * @param string[]|null $types Типы объектов, среди которых производится поиск. При передаче нескольких типов менее
      * релевантные результаты одних типов могут вытесниться более релевантными других типов (Types)
-     * @param array|null $fields Дополнительные поля, которые необходимо отобразить в ответе (Fields)
+     * @param string[]|null $fields Дополнительные поля, которые необходимо отобразить в ответе (Fields)
      * @param string|null $search_type Тип производимого поиска (Search\Types)
      * @param string|null $sort Тип сортировки результатов (Search\Sorts)
      * @param Location|null $sort_point Координаты точки, от которой производится сортировка
@@ -91,18 +91,18 @@ class Api
      * от 0 до 2000 — при отсутствии.
      * Значение по умолчанию: 250 — в сочетании с point, 0 — в сочетании с lon/lat.
      * Используется для фильтрации результатов в окружности.
-     * @param array|null $district_ids Идентификаторы районов. Используется для фильтрации объектов по району.
+     * @param string[]|null $district_ids Идентификаторы районов. Используется для фильтрации объектов по району.
      * Максимальное количество — 50
-     * @param array|null $building_ids Идентификаторы зданий. Используется для фильтрации объектов в здании.
+     * @param string[]|null $building_ids Идентификаторы зданий. Используется для фильтрации объектов в здании.
      * Максимальное количество — 50
-     * @param array|null $city_ids Идентификаторы городов, разделённые запятыми.
+     * @param string[]|null $city_ids Идентификаторы городов, разделённые запятыми.
      * Используется для фильтрации объектов по городу. Максимальное количество — 50
      * @param string|null $polygon Полигон в формате WKT.
      * Используется для фильтрации результатов в произвольной области.
      * @param Location|null $viewpoint1 Координаты левой верхней вершины прямоугольной области видимости
      * @param Location|null $viewpoint2 Координаты правой нижней вершины прямоугольной области видимости
      * @param bool|null $is_viewport_change
-     * @return array
+     * @return ItemsList
      * @throws ApiError
      * @throws GuzzleException
      */
@@ -124,7 +124,7 @@ class Api
             'radius' => $radius,
             'district_id' => $district_ids === null ? null : implode(',', $district_ids),
             'building_id' => $building_ids === null ? null : implode(',', $building_ids),
-            'city_ids' => $city_ids === null ? null : implode(',', $city_ids),
+            'city_id' => $city_ids === null ? null : implode(',', $city_ids),
             'polygon' => $polygon,
             'viewpoint1' => $viewpoint1 === null ? null : (string)$viewpoint1,
             'viewpoint2' => $viewpoint2 === null ? null : (string)$viewpoint2,
@@ -224,6 +224,7 @@ class Api
         $get['key'] = $this->key;
         if ($this->params_changer !== null) {
             $get = call_user_func($this->params_changer, $url, $get);
+            echo http_build_query($get), PHP_EOL;
         }
 
         $url .= '?' . http_build_query($get);

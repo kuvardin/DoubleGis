@@ -114,24 +114,24 @@ class Contact
     public string $text;
 
     /**
-     * @var string Значение контакта для вывода на принтер
+     * @var string|null Значение контакта для вывода на принтер
      */
-    public string $print_text;
+    public ?string $print_text;
 
     /**
-     * @var string Уточняющая информация о контакте
+     * @var string|null Уточняющая информация о контакте
      */
-    public string $comment;
+    public ?string $comment;
 
     /**
-     * @var string Ссылка на сайт или социальную сеть
+     * @var string|null Ссылка на сайт или социальную сеть
      */
-    public string $url;
+    public ?string $url;
 
     /**
-     * @var string URL для регистрации бизнес-коннекшна просмотра профиля
+     * @var string|null URL для регистрации бизнес-коннекшна просмотра профиля
      */
-    public string $reg_bc_url;
+    public ?string $reg_bc_url;
 
     /**
      * Contact constructor.
@@ -148,10 +148,10 @@ class Contact
 
         $this->value = $data['value'];
         $this->text = $data['text'];
-        $this->print_text = $data['print_text'];
-        $this->comment = $data['comment'];
-        $this->url = $data['url'];
-        $this->reg_bc_url = $data['reg_bc_url'];
+        $this->print_text = $data['print_text'] ?? null;
+        $this->comment = $data['comment'] ?? null;
+        $this->url = $data['url'] ?? null;
+        $this->reg_bc_url = $data['reg_bc_url'] ?? null;
     }
 
     /**

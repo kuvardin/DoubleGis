@@ -39,9 +39,9 @@ class AdmDivision
     public const TYPE_REGION = 'region';
 
     /**
-     * @var string Идентификатор объекта административной единицы
+     * @var string|null Идентификатор объекта административной единицы
      */
-    public string $id;
+    public ?string $id;
 
     /**
      * @var string Идентификатор объекта административной единицы
@@ -82,7 +82,7 @@ class AdmDivision
      */
     public function __construct(array $data)
     {
-        $this->id = $data['id'];
+        $this->id = $data['id'] ?? null;
         $this->type = $data['type'];
 
         if (!self::checkType($this->type)) {
