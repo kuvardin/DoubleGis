@@ -50,9 +50,9 @@ class WeekDay
     public string $code;
 
     /**
-     * @var WorkingHours Часы работы
+     * @var WorkingHours[] Часы работы
      */
-    public WorkingHours $working_hours;
+    public array $working_hours;
 
     /**
      * WeekDay constructor.
@@ -63,7 +63,8 @@ class WeekDay
     public function __construct(string $code, array $data)
     {
         $this->code = $code;
-        $this->working_hours = new WorkingHours($data['working_hours']);
+        $this->working_hours = array_map(static fn(array $wh_data) => new WorkingHours($wh_data),
+            $data['working_hours']);
     }
 
     /**
