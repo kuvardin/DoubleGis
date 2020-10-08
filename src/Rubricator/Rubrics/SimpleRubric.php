@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Kuvardin\DoubleGis\Rubricator\Items;
+namespace Kuvardin\DoubleGis\Rubricator\Rubrics;
+
+use Kuvardin\DoubleGis\Rubricator\Rubric;
 
 /**
  * Рублика
@@ -10,7 +12,7 @@ namespace Kuvardin\DoubleGis\Rubricator\Items;
  * @package Kuvardin\DoubleGis\Rubricator\Items
  * @author Maxim Kuvardin <maxim@kuvard.in>
  */
-class Rubric extends Item
+class SimpleRubric extends Rubric
 {
     /**
      * @var string Идентификатор рубрики
@@ -18,24 +20,19 @@ class Rubric extends Item
     public string $id;
 
     /**
-     * @var string Короткая подпись к иконке
-     */
-    public string $caption;
-
-    /**
      * @var string Название рубрики
      */
     public string $name;
 
     /**
-     * @var string Сео-синоним
+     * @var string|null Сео-синоним
      */
-    public string $seo_name;
+    public ?string $seo_name;
 
     /**
-     * @var string Тег рубрики
+     * @var string|null Тег рубрики
      */
-    public string $tag;
+    public ?string $tag;
 
     /**
      * @var string Подпись рубрики
@@ -43,9 +40,9 @@ class Rubric extends Item
     public string $title;
 
     /**
-     * @var string Ссылка на иконку
+     * @var string|null Ссылка на иконку
      */
-    public string $icon_url;
+    public ?string $icon_url;
 
     /**
      * @var int Количество организаций в данной рубрике
@@ -58,9 +55,9 @@ class Rubric extends Item
     public int $branch_count;
 
     /**
-     * @var string Идентификатор организации, которая владеет данной рубрикой
+     * @var string|null Идентификатор организации, которая владеет данной рубрикой
      */
-    public string $owner_id;
+    public ?string $owner_id;
 
     /**
      * Rubric constructor.
@@ -71,15 +68,14 @@ class Rubric extends Item
     {
         parent::__construct($data);
         $this->id = $data['id'];
-        $this->caption = $data['caption'];
         $this->name = $data['name'];
-        $this->seo_name = $data['seo_name'];
-        $this->tag = $data['tag'];
+        $this->seo_name = $data['seo_name'] ?? null;
+        $this->tag = $data['tag'] ?? null;
         $this->title = $data['title'];
-        $this->icon_url = $data['icon_url'];
+        $this->icon_url = $data['icon_url'] ?? null;
         $this->org_count = $data['org_count'];
         $this->branch_count = $data['branch_count'];
-        $this->owner_id = $data['owner_id'];
+        $this->owner_id = $data['owner_id'] ?? null;
     }
 
     /**
@@ -87,6 +83,6 @@ class Rubric extends Item
      */
     public static function getType(): string
     {
-        return Item::TYPE_RUBRIC;
+        return Rubric::TYPE_SIMPLE_RUBRIC;
     }
 }

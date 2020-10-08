@@ -6,7 +6,6 @@ namespace Kuvardin\DoubleGis;
 
 use GuzzleHttp\Exception\GuzzleException;
 use Kuvardin\DoubleGis\Exceptions\ApiError;
-use GuzzleHttp;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 
@@ -74,6 +73,9 @@ class Api
     }
 
     /**
+     * Получение коллекции объектов.
+     * Осуществляет поиск мест по заданному запросу и выдаёт список результатов, разбитых на страницы.
+     *
      * @param int $region_id Идентификатор региона
      * @param string|null $query Произвольная поисковая строка
      * @param int|null $page Номер запрашиваемой страницы
@@ -136,6 +138,69 @@ class Api
         ]);
 
         return new ItemsList($response);
+    }
+
+    /**
+     * Получение списка категорий по параметрам.
+     * Осуществляет выдачу списка всех существующих категорий по заданным параметрам.
+     *
+     * @param int $region_id Идентификатор региона
+     * @param int|null $parent_id Идентификатор родительской категории
+     * @param string|null $sort Сортировка результатов. Допустимые значения:
+     * name - по наименованию (в алфавитном порядке по возрастанию).
+     * Если параметр не передан, сортировка не применяется
+     * @return Rubricator\ItemsList
+     * @throws ApiError
+     * @throws GuzzleException
+     */
+    public function getRubricatorItemsList(int $region_id, int $parent_id = null,
+        string $sort = null): Rubricator\ItemsList
+    {
+        $response = $this->request('3.0/rubricator/list', [
+            'region_id' => $region_id,
+            'locale' => $this->locale,
+            'parent_id' => $parent_id,
+            'sort' => $sort,
+        ]);
+        return new Rubricator\ItemsList($response);
+    }
+
+    /**
+     * Получение дашбоард-рубрикатора по параметрам.
+     * Возвращает дашбоард, удовлетворяющий параметрам, переданным в запросе.
+     *
+     * @param int $region_id Идентификатор региона
+     * @return Rubricator\ItemsList
+     * @throws ApiError
+     * @throws GuzzleException
+     */
+    public function getRubricatorDashboard(int $region_id): Rubricator\ItemsList
+    {
+        $response = $this->request('3.0/rubricator/dashboard', [
+            'region_id' => $region_id,
+            'locale' => $this->locale,
+        ]);
+        return new Rubricator\ItemsList($response);
+    }
+
+    /**
+     * Получение категории.
+     * Выводит подробную информацию о категории по её уникальному идентификатору.
+     *
+     * @param int $region_id
+     * @param int $rubric_id
+     * @return Rubricator\Rubric
+     * @throws ApiError
+     * @throws GuzzleException
+     */
+    public function getRubricatorItem(int $region_id, int $rubric_id): Rubricator\Rubric
+    {
+        $response = $this->request('3.0/rubricator/get', [
+            'region_id' => $region_id,
+            'id' => $rubric_id,
+            'locale' => $this->locale,
+        ]);
+        return Rubricator\Rubric::make($response);
     }
 
     /**

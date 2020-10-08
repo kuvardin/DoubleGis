@@ -18,7 +18,7 @@ class ItemsList
     public int $total;
 
     /**
-     * @var Items\Item[] Массив найденных объектов
+     * @var Rubric[] Массив найденных объектов
      */
     public array $items;
 
@@ -30,6 +30,6 @@ class ItemsList
     public function __construct(array $data)
     {
         $this->total = $data['total'];
-        $this->items = array_map(static fn($item_data) => Items\Item::make($item_data), $data['items']);
+        $this->items = array_map(static fn($item_data) => Rubric::make($item_data), $data['items']);
     }
 }

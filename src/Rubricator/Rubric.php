@@ -2,20 +2,20 @@
 
 declare(strict_types=1);
 
-namespace Kuvardin\DoubleGis\Rubricator\Items;
+namespace Kuvardin\DoubleGis\Rubricator;
 
 use Error;
 
 /**
- * Class Item
+ * Class Rubric
  *
- * @package Kuvardin\DoubleGis\Rubricator\Items
+ * @package Kuvardin\DoubleGis\Rubricator
  * @author Maxim Kuvardin <maxim@kuvard.in>
  */
-abstract class Item
+abstract class Rubric
 {
     /** категория */
-    public const TYPE_RUBRIC = 'rubric';
+    public const TYPE_SIMPLE_RUBRIC = 'rubric';
 
     /** псевдорубрика */
     public const TYPE_PSEUDO_RUBRIC = 'pseudorubric';
@@ -31,10 +31,15 @@ abstract class Item
 
     /** все типы */
     public const TYPE_ALL = [
-        self::TYPE_RUBRIC,
+        self::TYPE_SIMPLE_RUBRIC,
         self::TYPE_PSEUDO_RUBRIC,
         self::TYPE_META_RUBRIC,
     ];
+
+    /**
+     * @var string|null Короткая подпись к иконке
+     */
+    public ?string $caption;
 
     /**
      * Item constructor.
@@ -46,6 +51,7 @@ abstract class Item
         if ($data['type'] !== static::getType()) {
             throw new Error("Incorrect type: {$data['type']}");
         }
+        $this->caption = $data['caption'] === '' ? null : $data['caption'];
     }
 
     /**
@@ -60,17 +66,20 @@ abstract class Item
     public static function make(array $data): self
     {
         switch ($data['type']) {
-            case self::TYPE_RUBRIC:
-                return new Rubric($data);
+            case self::TYPE_SIMPLE_RUBRIC:
+                return new Rubrics\SimpleRubric($data);
 
             case self::TYPE_PSEUDO_RUBRIC:
-                return new PseudoRubric($data);
+                return new Rubrics\PseudoRubric($data);
 
             case self::TYPE_META_RUBRIC:
-                return new MetaRubric($data);
+                return new Rubrics\MetaRubric($data);
 
             case self::TYPE_GENERAL_RUBRIC:
+                return new Rubrics\GeneralRubric($data);
 
+            case self::TYPE_OWNED_RUBRIC:
+                return new Rubrics\OwnedRubric($data);
 
             default:
                 throw new Error("Unknown item type: {$data['type']}");
