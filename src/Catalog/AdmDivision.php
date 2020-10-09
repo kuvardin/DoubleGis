@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Kuvardin\DoubleGis\Catalog\AdmDivision;
+namespace Kuvardin\DoubleGis\Catalog;
 
 use Error;
 
@@ -66,9 +66,9 @@ class AdmDivision
     public ?bool $is_default;
 
     /**
-     * @var Flags|null Список признаков объекта
+     * @var AdmDivision\Flags|null Список признаков объекта
      */
-    public ?Flags $flags;
+    public ?AdmDivision\Flags $flags;
 
     /**
      * @var string|null Алиас населенного пункта
@@ -92,7 +92,7 @@ class AdmDivision
         $this->caption = $data['caption'] ?? null;
         $this->name = $data['name'];
         $this->is_default = $data['is_default'] ?? null;
-        $this->flags = isset($data['flags']) ? new Flags($data['flags']) : null;
+        $this->flags = isset($data['flags']) ? new AdmDivision\Flags($data['flags']) : null;
         $this->city_alias = $data['city_alias'] ?? null;
     }
 
