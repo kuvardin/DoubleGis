@@ -9,6 +9,12 @@ use Kuvardin\DoubleGis\Exceptions\ApiError;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
 
+/**
+ * Class Api
+ *
+ * @package Kuvardin\DoubleGis
+ * @author Maxim Kuvardin <maxim@kuvard.in>
+ */
 class Api
 {
     protected const HOST = 'https://catalog.api.2gis.ru';
@@ -33,17 +39,17 @@ class Api
     protected ?string $locale = self::LOCALE_DEFAULT;
 
     /**
-     * @var int
+     * @var int Таймаут соединения
      */
     public int $connection_timeout = self::CONNECTION_TIMEOUT_DEFAULT;
 
     /**
-     * @var int
+     * @var int Таймаут запроса
      */
     public int $request_timeout = self::REQUEST_TIMEOUT_DEFAULT;
 
     /**
-     * @var string
+     * @var string Юзер-агент
      */
     public string $user_agent = self::USER_AGENT_DEFAULT;
 
@@ -104,15 +110,16 @@ class Api
      * @param Location|null $viewpoint1 Координаты левой верхней вершины прямоугольной области видимости
      * @param Location|null $viewpoint2 Координаты правой нижней вершины прямоугольной области видимости
      * @param bool|null $is_viewport_change
-     * @return ItemsList
+     * @return Catalog\ItemsList
      * @throws ApiError
      * @throws GuzzleException
      */
-    public function getItemsByRegion(int $region_id, string $query = null, int $page = null, int $page_size = null,
-        array $rubric_ids = null, array $types = null, array $fields = null, string $search_type = null,
-        string $sort = null, Location $sort_point = null, Location $point = null, int $radius = null,
-        array $district_ids = null, array $building_ids = null, array $city_ids = null, string $polygon = null,
-        Location $viewpoint1 = null, Location $viewpoint2 = null, bool $is_viewport_change = null): ItemsList
+    public function getCatalogItemsByRegion(int $region_id, string $query = null, int $page = null,
+        int $page_size = null, array $rubric_ids = null, array $types = null, array $fields = null,
+        string $search_type = null, string $sort = null, Location $sort_point = null, Location $point = null,
+        int $radius = null, array $district_ids = null, array $building_ids = null, array $city_ids = null,
+        string $polygon = null, Location $viewpoint1 = null, Location $viewpoint2 = null,
+        bool $is_viewport_change = null): Catalog\ItemsList
     {
         $response = $this->request('3.0/items', [
             'locale' => $this->locale,
@@ -137,7 +144,7 @@ class Api
             'rubric_id' => $rubric_ids === null ? null : implode(',', $rubric_ids),
         ]);
 
-        return new ItemsList($response);
+        return new Catalog\ItemsList($response);
     }
 
     /**
@@ -222,9 +229,9 @@ class Api
         return $this->request('3.0/suggests', [
             'locale' => $this->locale,
             'q' => $query,
-            'fields' => implode(',', $fields ?? Fields::ALL),
-            'type' => implode(',', $types ?? Types::ALL),
-            'suggest_type' => implode(',', $suggest_types ?? Suggest\Types::ALL),
+            'fields' => implode(',', $fields ?? Suggests\Fields::ALL),
+            'type' => implode(',', $types ?? Suggests\Types::ALL),
+            'suggest_type' => implode(',', $suggest_types ?? Suggests\Types::ALL),
             'region_id' => $region_id,
             'location' => $location === null ? null : (string)$location,
             'page_size' => $page_size,

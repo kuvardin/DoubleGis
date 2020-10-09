@@ -60,7 +60,7 @@ class SimpleRubric extends Rubric
     public ?string $owner_id;
 
     /**
-     * Rubric constructor.
+     * SimpleRubric constructor.
      *
      * @param array $data
      */

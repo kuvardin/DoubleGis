@@ -27,20 +27,10 @@ class Location
     /**
      * Location constructor.
      *
-     * @param array $data
-     */
-    public function __construct(array $data)
-    {
-        $this->longitude = $data['lon'];
-        $this->latitude = $data['lat'];
-    }
-
-    /**
      * @param float $latitude
      * @param float $longitude
-     * @return static
      */
-    public static function make(float $latitude, float $longitude): self
+    public function __construct(float $latitude, float $longitude)
     {
         if ($latitude < -90 || $latitude > 90) {
             throw new Error("Incorrect latitude: $latitude");
@@ -50,7 +40,17 @@ class Location
             throw new Error("Incorrect longitude: $longitude");
         }
 
-        return new self(['lon' => $longitude, 'lat' => $latitude]);
+        $this->longitude = $longitude;
+        $this->latitude = $latitude;
+    }
+
+    /**
+     * @param array $data
+     * @return static
+     */
+    public static function parse(array $data): self
+    {
+        return new self($data['lat'], $data['lon']);
     }
 
     /**
