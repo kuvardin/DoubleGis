@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kuvardin\DoubleGis\Catalog\Items;
 
 use Kuvardin\DoubleGis\Catalog\Address\Address;
-use Kuvardin\DoubleGis\Catalog\AdmDivision\AdmDivision;
+use Kuvardin\DoubleGis\Catalog\AdmDivision;
 use Kuvardin\DoubleGis\Catalog\Contacts\Group as ContactsGroup;
 use Kuvardin\DoubleGis\Catalog\Items\Branch\Attributes\Group as AttributesGroup;
 use Kuvardin\DoubleGis\Location;
