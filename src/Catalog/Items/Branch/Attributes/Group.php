@@ -18,9 +18,9 @@ class Group
     public ?string $icon_url;
 
     /**
-     * @var string Название группы дополнительных атрибутов
+     * @var string|null Название группы дополнительных атрибутов
      */
-    public string $name;
+    public ?string $name;
 
     /**
      * @var bool Признак того, что есть пересечение между контекстными рубриками и рубриками дополнительных
@@ -52,7 +52,7 @@ class Group
     public function __construct(array $data)
     {
         $this->icon_url = $data['icon_url'] ?? null;
-        $this->name = $data['name'];
+        $this->name = $data['name'] ?? null;
         $this->is_context = $data['is_context'];
         $this->is_primary = $data['is_primary'];
         $this->rubric_ids = $data['rubrics_ids'] ?? null;
