@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kuvardin\DoubleGis\Catalog\Items;
 
+use Error;
 use Kuvardin\DoubleGis\Catalog\Address\Address;
 use Kuvardin\DoubleGis\Catalog\AdmDivision;
 use Kuvardin\DoubleGis\Catalog\Contacts\Group as ContactsGroup;
@@ -265,5 +266,27 @@ class Branch extends Item
     public static function getType(): string
     {
         return Item::TYPE_BRANCH;
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdPrimary(): string
+    {
+        if (!preg_match('|^(\d+)_|', $this->id, $match)) {
+            throw new Error("Primary branch id not found in: {$this->id}");
+        }
+        return $match[1];
+    }
+
+    /**
+     * @return string
+     */
+    public function getIdSecondary(): string
+    {
+        if (!preg_match('|^\d+_(.*)$|su', $this->id, $match)) {
+            throw new Error("Secondary branch id not found in: {$this->id}");
+        }
+        return $match[1];
     }
 }
