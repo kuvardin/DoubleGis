@@ -184,17 +184,17 @@ class Contact
                 return $this->url;
 
             case self::TYPE_INSTAGRAM:
-                if (!preg_match('|^https://instagram\.com/([A-Za-z0-9_.]+)$|ui', $this->url, $match)) {
+                if (!preg_match('|^https://instagram\.com/([A-Za-z0-9_.]+)(\?.*)?$|ui', $this->url, $match)) {
                     throw new Error("Incorrect Instagram url: {$this->url}");
                 }
                 return $match[1];
 
             case self::TYPE_FACEBOOK:
-                if (preg_match('|^https://facebook\.com/([A-Za-z0-9\-_./]+)$|ui', $this->url, $match)) {
+                if (preg_match('|^https://facebook\.com/([A-Za-z0-9\-_./]+)(\?.*)?$|ui', $this->url, $match)) {
                     return $match[1];
                 }
 
-                if (preg_match('|^https://facebook\.com/profile\.php\?id=(\d+)$|ui', $this->url, $match)) {
+                if (preg_match('|^https://facebook\.com/profile\.php\?id=(\d+)|ui', $this->url, $match)) {
                     return "id:{$match[1]}";
                 }
                 throw new Error("Incorrect FaceBook url: {$this->url}");
@@ -206,43 +206,43 @@ class Contact
                 return $match[1];
 
             case self::TYPE_ODNOKLASSNIKI:
-                if (!preg_match('#^https://ok\.ru/([A-Za-z0-9_./]+)$#', $this->url, $match)) {
+                if (!preg_match('#^https://ok\.ru/([A-Za-z0-9_./]+)(\?.*)?$#', $this->url, $match)) {
                     throw new Error("Incorrect Odnoklassniki url value: {$this->value}");
                 }
                 return $match[1];
 
             case self::TYPE_VKONTAKTE:
-                if (!preg_match('|^https://vk\.com/([A-Za-z0-9_.]+)$|', $this->url, $match)) {
+                if (!preg_match('|^https://vk\.com/([A-Za-z0-9_.]+)(\?.*)?$|', $this->url, $match)) {
                     throw new Error("Incorrect VK url value: {$this->url}");
                 }
                 return $match[1];
 
             case self::TYPE_TELEGRAM:
-                if (!preg_match('|^https://t\.me/([A-Za-z0-9_.]+)$|', $this->url, $match)) {
+                if (!preg_match('|^https://t\.me/([A-Za-z0-9_.]+)(\?.*)?$|', $this->url, $match)) {
                     throw new Error("Incorrect Telegram url value: {$this->url}");
                 }
                 return $match[1];
 
             case self::TYPE_YOUTUBE:
-                if (preg_match('|^https://(www\.)?youtube\.com/([A-Za-z0-9\-_./]+)$|', $this->url, $match)) {
+                if (preg_match('|^https://(www\.)?youtube\.com/([A-Za-z0-9\-_./]+)(\?.*)?$|', $this->url, $match)) {
                     return $match[2];
                 }
                 throw new Error("Incorrect YouTube url value: {$this->url}");
 
             case self::TYPE_VIBER:
-                if (!preg_match('|^viber://contact/\?number=(\d+)$|', $this->url, $match)) {
+                if (!preg_match('|^viber://contact/\?number=(\d+)|', $this->url, $match)) {
                     throw new Error("Incorrect Viber url value: {$this->url}");
                 }
                 return $match[1];
 
             case self::TYPE_TWITTER:
-                if (!preg_match('|^https://twitter\.com/([A-Za-z0-9_.]+)$|', $this->url, $match)) {
+                if (!preg_match('|^https://twitter\.com/([A-Za-z0-9_.]+)(\?.*)?$|', $this->url, $match)) {
                     throw new Error("Incorrect Twitter url value: {$this->url}");
                 }
                 return $match[1];
 
             case self::TYPE_LINKEDIN:
-                if (!preg_match('|^https://linkedin\.com/([A-Za-z0-9_./]+)$|', $this->url, $match)) {
+                if (!preg_match('|^https://linkedin\.com/([A-Za-z0-9_./]+)(\?.*)?$|', $this->url, $match)) {
                     throw new Error("Incorrect LinkedIn url value: {$this->url}");
                 }
                 return $match[1];
