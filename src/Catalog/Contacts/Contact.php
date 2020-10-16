@@ -152,6 +152,8 @@ class Contact
         $this->comment = $data['comment'] ?? null;
         $this->url = $data['url'] ?? null;
         $this->reg_bc_url = $data['reg_bc_url'] ?? null;
+
+        echo "{$this->type}: {$this->getShortValue()}\n";
     }
 
     /**
@@ -161,5 +163,98 @@ class Contact
     public static function checkType(string $type): bool
     {
         return in_array($type, self::TYPES_ALL, true);
+    }
+
+    /**
+     * @return string
+     */
+    public function getShortValue(): string
+    {
+        switch ($this->type) {
+            case self::TYPE_PHONE:
+                if (!preg_match('|^\+?\d+|', $this->value, $match)) {
+                    throw new Error("Incorrect phone number: {$this->value}");
+                }
+                return $match[0];
+
+            case self::TYPE_EMAIL:
+            case self::TYPE_SKYPE:
+            case self::TYPE_ICQ:
+                return $this->value;
+
+            case self::TYPE_WEBSITE:
+                return $this->url;
+
+            case self::TYPE_INSTAGRAM:
+                if (!preg_match('|^https://instagram\.com/([A-Za-z0-9_.]+)$|ui', $this->url, $match)) {
+                    throw new Error("Incorrect Instagram url: {$this->url}");
+                }
+                return $match[1];
+
+            case self::TYPE_FACEBOOK:
+                if (preg_match('|^https://facebook\.com/([A-Za-z0-9\-_./]+)$|ui', $this->url, $match)) {
+                    return $match[1];
+                }
+
+                if (preg_match('|^https://facebook\.com/profile\.php\?id=(\d+)$|ui', $this->url, $match)) {
+                    return "id:{$match[1]}";
+                }
+                throw new Error("Incorrect FaceBook url: {$this->url}");
+
+            case self::TYPE_WHATSAPP:
+                if (!preg_match('|^https://wa\.me/(\d+)|ui', $this->url, $match)) {
+                    throw new Error("Incorrect WhatsApp url value: {$this->url}");
+                }
+                return $match[1];
+
+            case self::TYPE_ODNOKLASSNIKI:
+                if (!preg_match('#^https://ok\.ru/([A-Za-z0-9_./]+)$#', $this->url, $match)) {
+                    throw new Error("Incorrect Odnoklassniki url value: {$this->value}");
+                }
+                return $match[1];
+
+            case self::TYPE_VKONTAKTE:
+                if (!preg_match('|^https://vk\.com/([A-Za-z0-9_.]+)$|', $this->url, $match)) {
+                    throw new Error("Incorrect VK url value: {$this->url}");
+                }
+                return $match[1];
+
+            case self::TYPE_TELEGRAM:
+                if (!preg_match('|^https://t\.me/([A-Za-z0-9_.]+)$|', $this->url, $match)) {
+                    throw new Error("Incorrect Telegram url value: {$this->url}");
+                }
+                return $match[1];
+
+            case self::TYPE_YOUTUBE:
+                if (preg_match('|^https://(www\.)?youtube\.com/([A-Za-z0-9\-_./]+)$|', $this->url, $match)) {
+                    return $match[2];
+                }
+                throw new Error("Incorrect YouTube url value: {$this->url}");
+
+            case self::TYPE_VIBER:
+                if (!preg_match('|^viber://contact/\?number=(\d+)$|', $this->url, $match)) {
+                    throw new Error("Incorrect Viber url value: {$this->url}");
+                }
+                return $match[1];
+
+            case self::TYPE_TWITTER:
+                if (!preg_match('|^https://twitter\.com/([A-Za-z0-9_.]+)$|', $this->url, $match)) {
+                    throw new Error("Incorrect Twitter url value: {$this->url}");
+                }
+                return $match[1];
+
+            case self::TYPE_LINKEDIN:
+                if (!preg_match('|^https://linkedin\.com/([A-Za-z0-9_./]+)$|', $this->url, $match)) {
+                    throw new Error("Incorrect LinkedIn url value: {$this->url}");
+                }
+                return $match[1];
+
+            case self::TYPE_FAX:
+            case self::TYPE_JABBER:
+            case self::TYPE_POBOX:
+            case self::TYPE_GOOGLEPLUS:
+            case self::TYPE_PINTEREST:
+                throw new Error("Unknown contact typed {$this->type}: " . print_r($this, true));
+        }
     }
 }
