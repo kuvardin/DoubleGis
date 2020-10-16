@@ -236,10 +236,11 @@ class Contact
                 return $match[1];
 
             case self::TYPE_TWITTER:
-                if (!preg_match('|^https://twitter\.com/([A-Za-z0-9_.]+)(\?.*)?$|', $this->url, $match)) {
+                if (!preg_match('|^https://twitter\.com/(mobile\.twitter\.com/)?([A-Za-z0-9_.]+)(\?.*)?$|',
+                    $this->url, $match)) {
                     throw new Error("Incorrect Twitter url value: {$this->url}");
                 }
-                return $match[1];
+                return $match[2];
 
             case self::TYPE_LINKEDIN:
                 if (!preg_match('|^https://linkedin\.com/([A-Za-z0-9_./]+)(\?.*)?$|', $this->url, $match)) {
