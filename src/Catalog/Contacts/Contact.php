@@ -152,8 +152,6 @@ class Contact
         $this->comment = $data['comment'] ?? null;
         $this->url = $data['url'] ?? null;
         $this->reg_bc_url = $data['reg_bc_url'] ?? null;
-
-        echo "{$this->type}: {$this->getShortValue()}\n";
     }
 
     /**
