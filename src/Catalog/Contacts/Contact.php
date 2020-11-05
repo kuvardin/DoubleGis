@@ -256,4 +256,63 @@ class Contact
                 throw new Error("Unknown contact typed {$this->type}: " . print_r($this, true));
         }
     }
+
+    /**
+     * @param string $type
+     * @param string $short_value
+     * @return string|null
+     */
+    public static function getUrlByShortValue(string $type, string $short_value): ?string
+    {
+        switch ($type) {
+            case self::TYPE_PHONE:
+            case self::TYPE_EMAIL:
+            case self::TYPE_SKYPE:
+            case self::TYPE_ICQ:
+            case self::TYPE_WEBSITE:
+                return null;
+
+            case self::TYPE_INSTAGRAM:
+                return "https://instagram.com/$short_value";
+
+            case self::TYPE_FACEBOOK:
+                if (strpos($short_value, 'id:') === 0) {
+                    $short_value = substr($short_value, 3);
+                    return "https://facebook\.com/profile.php?id=$short_value";
+                }
+                return "https://facebook.com/$short_value";
+
+            case self::TYPE_WHATSAPP:
+                return "https://wa.me/$short_value";
+
+            case self::TYPE_ODNOKLASSNIKI:
+                return "https://ok.ru/$short_value";
+
+            case self::TYPE_VKONTAKTE:
+                return "https://vk.com/$short_value";
+
+            case self::TYPE_TELEGRAM:
+                return "https://t.me/$short_value";
+
+            case self::TYPE_YOUTUBE:
+                return "https://youtube.com/$short_value";
+
+
+            case self::TYPE_VIBER:
+                return "viber://contact/?number=$short_value";
+
+            case self::TYPE_TWITTER:
+                return "https://twitter.com/$short_value";
+
+            case self::TYPE_LINKEDIN:
+                return "https://linkedin.com/$short_value";
+
+            case self::TYPE_FAX:
+            case self::TYPE_JABBER:
+            case self::TYPE_POBOX:
+            case self::TYPE_GOOGLEPLUS:
+            case self::TYPE_PINTEREST:
+                throw new Error("Unknown contact typed {$type}: $short_value");
+        }
+    }
 }
