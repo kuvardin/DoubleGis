@@ -268,9 +268,11 @@ class Contact
             case self::TYPE_PHONE:
             case self::TYPE_EMAIL:
             case self::TYPE_SKYPE:
-            case self::TYPE_ICQ:
             case self::TYPE_WEBSITE:
                 return null;
+
+            case self::TYPE_ICQ:
+                return "https://icq.im/$short_value";
 
             case self::TYPE_INSTAGRAM:
                 return "https://instagram.com/$short_value";
