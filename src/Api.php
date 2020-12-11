@@ -4,10 +4,12 @@ declare(strict_types=1);
 
 namespace Kuvardin\DoubleGis;
 
+use Error;
 use GuzzleHttp\Exception\GuzzleException;
 use Kuvardin\DoubleGis\Exceptions\ApiError;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
+use Kuvardin\DoubleGis\Geometry\Point;
 
 /**
  * Class Api
@@ -21,7 +23,8 @@ class Api
     protected const CONNECTION_TIMEOUT_DEFAULT = 7;
     protected const REQUEST_TIMEOUT_DEFAULT = 10;
     protected const LOCALE_DEFAULT = Locales::RU_KZ;
-    protected const USER_AGENT_DEFAULT = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:81.0) Gecko/20100101 Firefox/81.0';
+    protected const USER_AGENT_DEFAULT = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:81.0) Gecko/20100101 ' .
+        'Firefox/81.0';
 
     /**
      * @var Client
@@ -92,8 +95,8 @@ class Api
      * @param string[]|null $fields Дополнительные поля, которые необходимо отобразить в ответе (Fields)
      * @param string|null $search_type Тип производимого поиска (Search\Types)
      * @param string|null $sort Тип сортировки результатов (Search\Sorts)
-     * @param Location|null $sort_point Координаты точки, от которой производится сортировка
-     * @param Location|null $point Центр области поиска. Используется для фильтрации результатов в окружности
+     * @param Point|null $sort_point Координаты точки, от которой производится сортировка
+     * @param Point|null $point Центр области поиска. Используется для фильтрации результатов в окружности
      * @param int|null $radius Радиус поиска в метрах. Ограничение:
      * от 0 до 40000 — при наличии поискового запроса,
      * от 0 до 2000 — при отсутствии.
@@ -107,8 +110,8 @@ class Api
      * Используется для фильтрации объектов по городу. Максимальное количество — 50
      * @param string|null $polygon Полигон в формате WKT.
      * Используется для фильтрации результатов в произвольной области.
-     * @param Location|null $viewpoint1 Координаты левой верхней вершины прямоугольной области видимости
-     * @param Location|null $viewpoint2 Координаты правой нижней вершины прямоугольной области видимости
+     * @param Point|null $viewpoint1 Координаты левой верхней вершины прямоугольной области видимости
+     * @param Point|null $viewpoint2 Координаты правой нижней вершины прямоугольной области видимости
      * @param bool|null $is_viewport_change
      * @return Catalog\ItemsList
      * @throws ApiError
@@ -116,9 +119,9 @@ class Api
      */
     public function getCatalogItemsByRegion(int $region_id, string $query = null, int $page = null,
         int $page_size = null, array $rubric_ids = null, array $types = null, array $fields = null,
-        string $search_type = null, string $sort = null, Location $sort_point = null, Location $point = null,
+        string $search_type = null, string $sort = null, Point $sort_point = null, Point $point = null,
         int $radius = null, array $district_ids = null, array $building_ids = null, array $city_ids = null,
-        string $polygon = null, Location $viewpoint1 = null, Location $viewpoint2 = null,
+        string $polygon = null, Point $viewpoint1 = null, Point $viewpoint2 = null,
         bool $is_viewport_change = null): Catalog\ItemsList
     {
         $response = $this->request('3.0/items', [
@@ -128,15 +131,15 @@ class Api
             'fields' => $fields === null ? null : implode(',', $fields),
             'search_type' => $search_type,
             'sort' => $sort,
-            'sort_point' => $sort_point === null ? null : (string)$sort_point,
-            'point' => $point === null ? null : (string)$point,
+            'sort_point' => $sort_point === null ? null : $sort_point->getStringForRequest(),
+            'point' => $point === null ? null : $point->getStringForRequest(),
             'radius' => $radius,
             'district_id' => $district_ids === null ? null : implode(',', $district_ids),
             'building_id' => $building_ids === null ? null : implode(',', $building_ids),
             'city_id' => $city_ids === null ? null : implode(',', $city_ids),
             'polygon' => $polygon,
-            'viewpoint1' => $viewpoint1 === null ? null : (string)$viewpoint1,
-            'viewpoint2' => $viewpoint2 === null ? null : (string)$viewpoint2,
+            'viewpoint1' => $viewpoint1 === null ? null : $viewpoint1->getStringForRequest(),
+            'viewpoint2' => $viewpoint2 === null ? null : $viewpoint2->getStringForRequest(),
             'region_id' => $region_id,
             'is_viewport_change' => $is_viewport_change,
             'page' => $page,
@@ -217,14 +220,14 @@ class Api
      * @param string[]|null $fields
      * @param string[]|null $types
      * @param string[]|null $suggest_types
-     * @param Location|null $location
+     * @param Point|null $location
      * @param bool|null $allow_deleted
      * @return array
      * @throws ApiError
      * @throws GuzzleException
      */
     public function getSuggestsByRegion(int $region_id, string $query, int $page_size = null, array $fields = null,
-        array $types = null, array $suggest_types = null, Location $location = null, bool $allow_deleted = null): array
+        array $types = null, array $suggest_types = null, Point $location = null, bool $allow_deleted = null): array
     {
         return $this->request('3.0/suggests', [
             'locale' => $this->locale,
@@ -233,39 +236,39 @@ class Api
             'type' => implode(',', $types ?? Suggests\Types::ALL),
             'suggest_type' => implode(',', $suggest_types ?? Suggests\Types::ALL),
             'region_id' => $region_id,
-            'location' => $location === null ? null : (string)$location,
+            'location' => $location === null ? null : $location->getStringForRequest(),
             'page_size' => $page_size,
             'allow_deleted' => $allow_deleted,
         ]);
     }
 
     /**
-     * @param Location $viewpoint1
-     * @param Location $viewpoint2
+     * @param Point $viewpoint1
+     * @param Point $viewpoint2
      * @param string $query
      * @param int|null $page_size
      * @param string[]|null $fields
      * @param string[]|null $types
      * @param string[]|null $suggest_types
-     * @param Location|null $location
+     * @param Point|null $location
      * @param bool|null $allow_deleted
      * @return array
      * @throws ApiError
      * @throws GuzzleException
      */
-    public function getSuggestsByViewpoints(Location $viewpoint1,Location $viewpoint2, string $query,
+    public function getSuggestsByViewpoints(Point $viewpoint1,Point $viewpoint2, string $query,
         int $page_size = null, array $fields = null, array $types = null, array $suggest_types = null,
-        Location $location = null, bool $allow_deleted = null): array
+        Point $location = null, bool $allow_deleted = null): array
     {
         return $this->request('3.0/suggests', [
             'locale' => $this->locale,
             'q' => $query,
-            'fields' => implode(',', $fields ?? Fields::ALL),
-            'type' => implode(',', $types ?? Types::ALL),
-            'suggest_type' => implode(',', $suggest_types ?? Suggest\Types::ALL),
-            'viewpoint1' => (string)$viewpoint1,
-            'viewpoint2' => (string)$viewpoint2,
-            'location' => $location === null ? null : (string)$location,
+            'fields' => implode(',', $fields ?? Suggests\Fields::ALL),
+            'type' => implode(',', $types ?? Suggests\Types::ALL),
+            'suggest_type' => implode(',', $suggest_types ?? Suggests\Types::ALL),
+            'viewpoint1' => $viewpoint1->getStringForRequest(),
+            'viewpoint2' => $viewpoint2->getStringForRequest(),
+            'location' => $location === null ? null : $location->getStringForRequest(),
             'page_size' => $page_size,
             'allow_deleted' => $allow_deleted,
         ]);
@@ -295,7 +298,11 @@ class Api
         $get ??= [];
         $get['key'] = $this->key;
         if ($this->params_changer !== null) {
-            $get = call_user_func($this->params_changer, $url, $get);
+            $get_changed = call_user_func($this->params_changer, $url, $get);
+            if ($get_changed === false) {
+                throw new Error('Params changer error');
+            }
+            $get = $get_changed;
         }
 
         $url .= '?' . http_build_query($get);

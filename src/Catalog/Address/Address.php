@@ -40,9 +40,9 @@ class Address
     public ?string $makani;
 
     /**
-     * @var Component[] Массив компонентов адреса
+     * @var Component[]|null Массив компонентов адреса
      */
-    public array $components;
+    public ?array $components = null;
 
     /**
      * @var string|null URL для регистрации бизнес-коннекшна просмотра профиля
@@ -61,10 +61,10 @@ class Address
         $this->building_code = $data['building_code'] ?? null;
         $this->building_name = $data['building_name'] ?? null;
         $this->makani = $data['makani'] ?? null;
-        $this->components = array_map(static fn($component_data) => Component::make($component_data),
-            $data['components']);
+        if (isset($data['components'])) {
+            $this->components = array_map(static fn($component_data) => Component::make($component_data),
+                $data['components']);
+        }
         $this->reg_bc_url = $data['reg_bc_url'] ?? null;
     }
-
-
 }

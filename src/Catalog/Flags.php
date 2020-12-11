@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Kuvardin\DoubleGis\Catalog\AdmDivision;
+namespace Kuvardin\DoubleGis\Catalog;
 
 use Kuvardin\DoubleGis\Catalog\Badge;
 
 /**
  * Список признаков объекта
  *
- * @package Kuvardin\DoubleGis\AmdDivision
+ * @package Kuvardin\DoubleGis\Catalog
  * @author Maxim Kuvardin <maxim@kuvard.in>
  */
 class Flags

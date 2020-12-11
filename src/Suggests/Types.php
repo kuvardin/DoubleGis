@@ -12,55 +12,148 @@ namespace Kuvardin\DoubleGis\Suggests;
  */
 class Types
 {
-    /** идеально подходит для быстрого поиска конечных объектов маршрута. Все результаты имеют id и координаты */
-    public const ROUTE_ENDPOINT = 'route_endpoint';
-
-    /** подсказка адресов */
+    /** адрес */
     public const ADDRESS = 'address';
 
-    /** подсказка по объектам справочника (категории, фирмы, улицы, города и т.д.) */
-    public const OBJECT = 'object';
+    /** компания */
+    public const BRANCH = 'branch';
 
-    /** подсказка улиц */
+    /** здание */
+    public const BUILDING = 'building';
+
+    /** улица */
     public const STREET = 'street';
 
-    /** подсказка категорий */
+    /** остановка */
+    public const STATION = 'station';
+
+    /** вход на станцию */
+    public const STATION_ENTRANCE = 'station_entrance';
+
+    /** пользовательский саггест */
+    public const USER_QUERIES = 'user_queries';
+
+    /** достопримечательность */
+    public const ATTRACTION = 'attraction';
+
+    /** перекрёсток */
+    public const CROSSROAD = 'crossroad';
+
+    /** категория */
     public const RUBRIC = 'rubric';
 
-    /** подсказка мест */
-    public const PLACES = 'places';
+    /** метакатегория */
+    public const META_RUBRIC = 'meta_rubric';
 
-    /** подсказка дополнительных атрибутов */
+    /** дополнительный атрибут */
     public const ATTRIBUTE = 'attribute';
 
-    /** подсказка адресов. Может использоваться без указания проекта */
-    public const GLOBAL_ADDRESS = 'global_address';
+    /** маршрут */
+    public const ROUTE = 'route';
 
-    /** алиас default */
-    public const GLOBAL = 'global';
+    /** тип маршрута */
+    public const ROUTE_TYPE = 'route_type';
 
-    /** подсказка населённых пунктов. Может использоваться без указания проекта */
-    public const CITY_SELECTOR = 'city_selector';
+    /** дорога */
+    public const ROAD = 'road';
 
-    /** используемый по умолчанию */
-    public const DEFAULT = 'default';
+    /** парковка */
+    public const PARKING = 'parking';
 
-    /** Все типы подсказок */
+    /** организация */
+    public const ORG = 'org';
+
+    /** глобальная координата */
+    public const COORDINATES = 'coordinates';
+
+    /** специальный */
+    public const SPECIAL = 'special';
+
+    /** станция метро */
+    public const STATION_METRO = 'station.metro';
+
+    /** район */
+    public const ADM_DIV_DISTRICT = 'adm_div.district';
+
+    /** район области */
+    public const ADM_DIV_DISTRICT_AREA = 'adm_div.district_area';
+
+    /** населённый пункт */
+    public const ADM_DIV_SETTLEMENT = 'adm_div.settlement';
+
+    /** город */
+    public const ADM_DIV_CITY = 'adm_div.city';
+
+    /** страна */
+    public const ADM_DIV_COUNTRY = 'adm_div.country';
+
+    /** регион (область/край/республика и т.п.) */
+    public const ADM_DIV_REGION = 'adm_div.region';
+
+    /** место */
+    public const ADM_DIV_PLACE = 'adm_div.place';
+
+    /** жилмассив, микрорайон */
+    public const ADM_DIV_LIVING_AREA = 'adm_div.living_area';
+
+    /** округ */
+    public const ADM_DIV_DIVISION = 'adm_div.division';
+
+    /** категории товаров. Требует наличия market.suggestor_category */
+    public const MARKET_CATEGORY = 'market.category';
+
+    /** необходим для раскрытия категорий товаров */
+    public const MARKET_SUGGESTOR_CATEGORY = 'market.suggestor_category';
+
+    /** наименования товаров */
+    public const MARKET_ATTRIBUTE = 'market.attribute';
+
+    /** бренд товаров */
+    public const MARKET_BRAND = 'market.brand';
+
+    /** все типы */
     public const ALL = [
-        self::ROUTE_ENDPOINT,
         self::ADDRESS,
-        self::OBJECT,
+        self::BRANCH,
+        self::BUILDING,
         self::STREET,
+        self::STATION,
+        self::STATION_ENTRANCE,
+        self::USER_QUERIES,
+        self::ATTRACTION,
+        self::CROSSROAD,
         self::RUBRIC,
-        self::PLACES,
+        self::META_RUBRIC,
         self::ATTRIBUTE,
-        self::GLOBAL_ADDRESS,
-        self::GLOBAL,
-        self::CITY_SELECTOR,
-        self::DEFAULT,
+        self::ROUTE,
+        self::ROUTE_TYPE,
+        self::ROAD,
+        self::PARKING,
+        self::ORG,
+        self::COORDINATES,
+        self::SPECIAL,
+        self::STATION_METRO,
+        self::ADM_DIV_DISTRICT,
+        self::ADM_DIV_DISTRICT_AREA,
+        self::ADM_DIV_SETTLEMENT,
+        self::ADM_DIV_CITY,
+        self::ADM_DIV_COUNTRY,
+        self::ADM_DIV_REGION,
+        self::ADM_DIV_PLACE,
+        self::ADM_DIV_LIVING_AREA,
+        self::ADM_DIV_DIVISION,
+        self::MARKET_CATEGORY,
+        self::MARKET_SUGGESTOR_CATEGORY,
+        self::MARKET_ATTRIBUTE,
+        self::MARKET_BRAND,
     ];
 
-    private function __construct() {}
+    /**
+     * Types constructor.
+     */
+    private function __construct()
+    {
+    }
 
     /**
      * @param string $type
@@ -68,6 +161,6 @@ class Types
      */
     public static function check(string $type): bool
     {
-        return in_array($type, self::ALL, true);
+        return in_array($type, self::ALL);
     }
 }

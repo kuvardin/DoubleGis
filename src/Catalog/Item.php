@@ -80,12 +80,18 @@ abstract class Item
     ];
 
     /**
+     * @var array
+     */
+    public array $raw_data;
+
+    /**
      * Item constructor.
      *
      * @param array $data
      */
     public function __construct(array $data)
     {
+        $this->raw_data = $data;
         if ($data['type'] !== static::getType()) {
             throw new Error("Incorrect type {$data['type']}. Must be " . static::getType());
         }
@@ -100,13 +106,53 @@ abstract class Item
      * @param array $data
      * @return static
      */
-    final public static function make(array $data): ?self
+    final public static function make(array $data): self
     {
         switch ($data['type']) {
             case Items\Branch::getType():
                 return new Items\Branch($data);
+
+            case Items\Building::getType():
+                return new Items\Building($data);
+
+            case Items\Street::getType():
+                return new Items\Street($data);
+
+            case Items\AdmDivision::getType():
+                return new Items\AdmDivision($data);
+
+            case Items\Attraction::getType():
+                return new Items\Attraction($data);
+
+            case Items\Crossroad::getType():
+                return new Items\Crossroad($data);
+
+            case Items\Parking::getType():
+                return new Items\Parking($data);
+
+            case Items\Road::getType():
+                return new Items\Road($data);
+
+            case Items\Gate::getType():
+                return new Items\Gate($data);
+
+            case Items\Route::getType():
+                return new Items\Route($data);
+
+            case Items\Station::getType():
+                return new Items\Station($data);
+
+            case Items\StationPlatform::getType():
+                return new Items\StationPlatform($data);
+
+            case Items\StationEntrance::getType():
+                return new Items\StationEntrance($data);
+
+            case Items\Project::getType():
+                return new Items\Project($data);
         }
-        return null;
+
+        throw new Error("Unknown catalog item type: {$data['type']}");
     }
 
     /**

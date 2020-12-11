@@ -10,7 +10,8 @@
     ],
     "require": {
         "guzzlehttp/guzzle": "^7.0",
-        "ext-json": "*"
+        "ext-json": "*",
+        "kuvardin/data-filter": " dev-master"
     },
     "autoload": {
         "psr-4": {

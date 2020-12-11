@@ -14,6 +14,7 @@ use Kuvardin\DoubleGis\Catalog\Organization;
 use Kuvardin\DoubleGis\Catalog\Shedule\Shedule;
 use Kuvardin\DoubleGis\Catalog\Rubrics\Rubric;
 use Kuvardin\DoubleGis\Catalog\Item;
+use Kuvardin\DoubleGis\Traits\LongId;
 
 /**
  * Филиал
@@ -23,10 +24,7 @@ use Kuvardin\DoubleGis\Catalog\Item;
  */
 class Branch extends Item
 {
-    /**
-     * @var string Уникальный идентификатор филиала организации
-     */
-    public string $id;
+    use LongId;
 
     /**
      * @var string|null Уникальный идентификатор проекта
@@ -207,7 +205,7 @@ class Branch extends Item
     public function __construct(array $data)
     {
         parent::__construct($data);
-        $this->id = $data['id'];
+        $this->setId($data['id']);
         $this->region_id = $data['region_id'] ?? null;
         $this->segment_id = $data['segment_id'] ?? null;
         $this->name = $data['name'];

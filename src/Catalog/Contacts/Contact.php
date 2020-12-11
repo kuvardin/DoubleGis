@@ -109,9 +109,9 @@ class Contact
     public string $value;
 
     /**
-     * @var string Значение контакта для вывода на экран
+     * @var string|null Значение контакта для вывода на экран
      */
-    public string $text;
+    public ?string $text;
 
     /**
      * @var string|null Значение контакта для вывода на принтер
@@ -147,7 +147,7 @@ class Contact
         }
 
         $this->value = $data['value'];
-        $this->text = $data['text'];
+        $this->text = $data['text'] ?? null;
         $this->print_text = $data['print_text'] ?? null;
         $this->comment = $data['comment'] ?? null;
         $this->url = $data['url'] ?? null;

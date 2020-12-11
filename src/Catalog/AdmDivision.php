@@ -66,9 +66,9 @@ class AdmDivision
     public ?bool $is_default;
 
     /**
-     * @var AdmDivision\Flags|null Список признаков объекта
+     * @var Flags|null Список признаков объекта
      */
-    public ?AdmDivision\Flags $flags;
+    public ?Flags $flags;
 
     /**
      * @var string|null Алиас населенного пункта
@@ -92,7 +92,7 @@ class AdmDivision
         $this->caption = $data['caption'] ?? null;
         $this->name = $data['name'];
         $this->is_default = $data['is_default'] ?? null;
-        $this->flags = isset($data['flags']) ? new AdmDivision\Flags($data['flags']) : null;
+        $this->flags = isset($data['flags']) ? new Flags($data['flags']) : null;
         $this->city_alias = $data['city_alias'] ?? null;
     }
 

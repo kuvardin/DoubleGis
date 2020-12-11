@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0557bfbd6258f49174d1b76693afd3f2",
+    "content-hash": "dadbe372a69401c840d4fa0c786ceb3c",
     "packages": [
         {
             "name": "guzzlehttp/guzzle",
@@ -227,6 +227,39 @@
             "time": "2019-07-01T23:21:34+00:00"
         },
         {
+            "name": "kuvardin/data-filter",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/kuvardin/DataFilter.git",
+                "reference": "b6169d745707900a8ede2148f5f72ce0f684c945"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/kuvardin/DataFilter/zipball/b6169d745707900a8ede2148f5f72ce0f684c945",
+                "reference": "b6169d745707900a8ede2148f5f72ce0f684c945",
+                "shasum": ""
+            },
+            "require": {
+                "ext-mbstring": "*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Kuvardin\\DataFilter\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "authors": [
+                {
+                    "name": "kuvardin",
+                    "email": "maxim@kuvard.in"
+                }
+            ],
+            "description": "Simple PHP data filter",
+            "time": "2020-09-25T09:35:56+00:00"
+        },
+        {
             "name": "psr/http-client",
             "version": "1.0.1",
             "source": {
@@ -368,8 +401,10 @@
     ],
     "packages-dev": [],
     "aliases": [],
-    "minimum-stability": "stable",
-    "stability-flags": [],
+    "minimum-stability": "dev",
+    "stability-flags": {
+        "kuvardin/data-filter": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {

@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kuvardin\DoubleGis\Catalog;
 
 use Kuvardin\DoubleGis\Catalog\Suggest\Part;
+use Kuvardin\DoubleGis\Suggests\Part;
 
 /**
  * Class SearchAttributes
