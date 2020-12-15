@@ -325,11 +325,9 @@ class Api
             RequestOptions::DECODE_CONTENT => true,
             RequestOptions::HEADERS => [
                 'User-Agent' => $this->user_agent ?? self::USER_AGENT_DEFAULT,
-
-
                 'Accept' => 'application/json, text/plain, */*',
                 'Accept-Language' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
-                'Accept-Encoding' => 'gzip, deflate, br',
+//                'Accept-Encoding' => 'gzip, deflate, br',
                 'Origin' => 'https://2gis.kz',
                 'DNT' => '1',
                 'Referer' => 'https://2gis.kz/karaganda?m=73.055817%2C49.815017%2F13.63',
