@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kuvardin\DoubleGis\Catalog;
 
 use Error;
+use Kuvardin\DoubleGis\Catalog\Items\AdmDivision\Types as AdmDivisionTypes;
 
 /**
  * Административная территория
@@ -14,37 +15,13 @@ use Error;
  */
 class AdmDivision
 {
-    /** город */
-    public const TYPE_CITY = 'city';
-
-    /** населённый пункт */
-    public const TYPE_SETTLEMENT = 'settlement';
-
-    /** округ */
-    public const TYPE_DIVISION = 'division';
-
-    /** район */
-    public const TYPE_DISTRICT = 'district';
-
-    /** жилмассив, микрорайон */
-    public const TYPE_LIVING_AREA = 'living_area';
-
-    /** место */
-    public const TYPE_PLACE = 'place';
-
-    /** район области */
-    public const TYPE_DISTRICT_AREA = 'district_area';
-
-    /** регион (область/край/республика и т.п.) */
-    public const TYPE_REGION = 'region';
-
     /**
      * @var string|null Идентификатор объекта административной единицы
      */
     public ?string $id;
 
     /**
-     * @var string Идентификатор объекта административной единицы
+     * @var string Идентификатор объекта административной единицы (AdmDivision\Types::*)
      */
     public string $type;
 
@@ -85,7 +62,7 @@ class AdmDivision
         $this->id = $data['id'] ?? null;
         $this->type = $data['type'];
 
-        if (!self::checkType($this->type)) {
+        if (!AdmDivisionTypes::check($this->type)) {
             throw new Error("Unknown adm division type: {$this->type}");
         }
 
@@ -94,21 +71,5 @@ class AdmDivision
         $this->is_default = $data['is_default'] ?? null;
         $this->flags = isset($data['flags']) ? new Flags($data['flags']) : null;
         $this->city_alias = $data['city_alias'] ?? null;
-    }
-
-    /**
-     * @param string $type
-     * @return bool
-     */
-    public static function checkType(string $type): bool
-    {
-        return $type === self::TYPE_REGION ||
-        $type === self::TYPE_DISTRICT_AREA ||
-        $type === self::TYPE_CITY ||
-        $type === self::TYPE_DISTRICT ||
-        $type === self::TYPE_DIVISION ||
-        $type === self::TYPE_PLACE ||
-        $type === self::TYPE_LIVING_AREA ||
-        $type === self::TYPE_SETTLEMENT;
     }
 }

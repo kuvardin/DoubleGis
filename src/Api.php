@@ -62,15 +62,22 @@ class Api
     public $params_changer = null;
 
     /**
+     * @var string|null
+     */
+    public ?string $session_id = null;
+
+    /**
      * Api constructor.
      *
      * @param Client $client
      * @param string $key
+     * @param string|null $session_id
      */
-    public function __construct(Client $client, string $key)
+    public function __construct(Client $client, string $key, string $session_id = null)
     {
         $this->client = $client;
         $this->key = $key;
+        $this->session_id = $session_id;
     }
 
     /**
@@ -297,6 +304,11 @@ class Api
 
         $get ??= [];
         $get['key'] = $this->key;
+
+        if ($this->session_id !== null) {
+            $get['stat[sid]'] = $this->session_id;
+        }
+
         if ($this->params_changer !== null) {
             $get_changed = call_user_func($this->params_changer, $url, $get);
             if ($get_changed === false) {
@@ -313,10 +325,15 @@ class Api
             RequestOptions::DECODE_CONTENT => true,
             RequestOptions::HEADERS => [
                 'User-Agent' => $this->user_agent ?? self::USER_AGENT_DEFAULT,
+
+
                 'Accept' => 'application/json, text/plain, */*',
                 'Accept-Language' => 'ru-RU,ru;q=0.8,en-US;q=0.5,en;q=0.3',
-                'Referer' => 'https://2gis.kz/',
+                'Accept-Encoding' => 'gzip, deflate, br',
+                'Origin' => 'https://2gis.kz',
                 'DNT' => '1',
+                'Referer' => 'https://2gis.kz/karaganda?m=73.055817%2C49.815017%2F13.63',
+                'Cookie' => 'lang=ru; country=1; language=ru; city=32; _2gis_webapi_user=afa51cb4-9586-40f1-bfe1-b8d9e874587e; openBeta=1; _2gis_webapi_session=d7145692-951b-4925-8147-566be35af28d',
                 'TE' => 'Trailers',
             ],
         ]);
