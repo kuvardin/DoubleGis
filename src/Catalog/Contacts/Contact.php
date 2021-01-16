@@ -253,8 +253,9 @@ class Contact
             case self::TYPE_POBOX:
             case self::TYPE_GOOGLEPLUS:
             case self::TYPE_PINTEREST:
-                break;
-// TODO:               throw new Error("Unknown contact typed {$this->type}: " . print_r($this, true));
+                // TODO:
+                return $this->url;
+                throw new Error("Unknown contact typed {$this->type}: " . print_r($this, true));
         }
     }
 
