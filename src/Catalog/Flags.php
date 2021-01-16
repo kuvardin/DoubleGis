@@ -29,10 +29,10 @@ class Flags
     public array $badges = [];
 
     /**
-     * @var bool Заполняется только для type=city и принимает единственное значение true в случае,
+     * @var bool|null Заполняется только для type=city и принимает единственное значение true в случае,
      * если город является главным городом текущего проекта (например Новосибирск)
      */
-    public bool $is_default;
+    public ?bool $is_default;
 
     /**
      * @var bool|null Заполняется только для type=adm_div, subtype=city|settlement и принимает единственное значение
