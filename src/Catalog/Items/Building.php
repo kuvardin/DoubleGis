@@ -229,6 +229,7 @@ class Building extends Item
         $this->allowed_for_reviews_count = $data['allowed_for_reviews_count'] ?? null;
         $this->context = new Context($data['context']);
         $this->links = isset($data['links']) ? new Links($data['links']) : null;
+        
     }
 
     /**

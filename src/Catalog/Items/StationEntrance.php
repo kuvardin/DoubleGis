@@ -18,7 +18,7 @@ class StationEntrance extends Item
     {
         parent::__construct($data);
     }
-4
+
     /**
      * @return string
      */

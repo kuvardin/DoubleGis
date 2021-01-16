@@ -9,7 +9,6 @@ use Kuvardin\DoubleGis\Catalog\Address\Address;
 use Kuvardin\DoubleGis\Catalog\AdmDivision;
 use Kuvardin\DoubleGis\Catalog\Contacts\Group as ContactsGroup;
 use Kuvardin\DoubleGis\Catalog\Items\Branch\Attributes\Group as AttributesGroup;
-use Kuvardin\DoubleGis\Location;
 use Kuvardin\DoubleGis\Catalog\Organization;
 use Kuvardin\DoubleGis\Catalog\Shedule\Shedule;
 use Kuvardin\DoubleGis\Catalog\Rubrics\Rubric;
@@ -124,10 +123,10 @@ class Branch extends Item
      */
     public ?bool $has_apartments_info;
 
-    /**
-     * @var Location|null Координаты точки поиска, заданные в системе координат WGS84 в формате lon, lat
-     */
-    public ?Location $point;
+//    /**
+//     * @var Location|null Координаты точки поиска, заданные в системе координат WGS84 в формате lon, lat
+//     */
+//    public ?Location $point;
 
     /**
      * @var string|null URL для регистрации бизнес-коннекшна просмотра профиля
@@ -229,7 +228,7 @@ class Branch extends Item
 //        $this->reply_rate =
 
         $this->has_apartments_info = $data['has_apartments_info'] ?? null;
-        $this->point = isset($data['point']) ? Location::parse($data['point']) : null;
+//        $this->point = isset($data['point']) ? Location::parse($data['point']) : null;
         $this->reg_bc_url = $data['reg_bc_url'] ?? null;
         $this->adm_divs = isset($data['adm_div'])
             ? array_map(static fn($adm_div_data) => new AdmDivision($adm_div_data), $data['adm_div'])
