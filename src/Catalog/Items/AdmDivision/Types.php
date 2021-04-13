@@ -12,6 +12,9 @@ namespace Kuvardin\DoubleGis\Catalog\Items\AdmDivision;
  */
 class Types
 {
+    /** страна */
+    public const COUNTRY = 'country';
+
     /** город */
     public const CITY = 'city';
 
@@ -46,6 +49,7 @@ class Types
         self::PLACE,
         self::DISTRICT_AREA,
         self::REGION,
+        self::COUNTRY,
     ];
 
     /**
