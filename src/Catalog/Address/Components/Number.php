@@ -15,7 +15,7 @@ use Kuvardin\DoubleGis\Catalog\Address\Component;
 class Number extends Component
 {
     /**
-     * @var string
+     * @var string Номер дома, включая дроби и буквенные обозначения. Возможно, имя собственное, если так принято
      */
     public string $number;
 

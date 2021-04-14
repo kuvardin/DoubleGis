@@ -7,7 +7,7 @@ namespace Kuvardin\DoubleGis\Catalog\Contacts;
 use Kuvardin\DoubleGis\Catalog\Shedule\Shedule;
 
 /**
- * Class Group
+ * Контакты филиала
  *
  * @package Kuvardin\DoubleGis\Contacts
  * @author Maxim Kuvardin <maxim@kuvard.in>
@@ -25,7 +25,7 @@ class Group
     public ?string $comment;
 
     /**
-     * @var Shedule|null
+     * @var Shedule|null Расписание группы контактов
      */
     public ?Shedule $schedule;
 

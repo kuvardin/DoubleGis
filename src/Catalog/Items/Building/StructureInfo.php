@@ -13,19 +13,19 @@ namespace Kuvardin\DoubleGis\Catalog\Items\Building;
 class StructureInfo
 {
     /**
-     * @var string Обозначение материала здания. Поле доступно только в коммерческом API
+     * @var string|null Обозначение материала здания. Поле доступно только в коммерческом API
      */
-    public string $material;
+    public ?string $material;
 
     /**
-     * @var int Количество квартир в жилом доме. Поле доступно только в коммерческом API
+     * @var int|null Количество квартир в жилом доме. Поле доступно только в коммерческом API
      */
-    public int $apartments_count;
+    public ?int $apartments_count;
 
     /**
-     * @var int Количество квартир в жилом доме. Поле доступно только в коммерческом API
+     * @var int|null Количество квартир в жилом доме. Поле доступно только в коммерческом API
      */
-    public int $porch_count;
+    public ?int $porch_count;
 
     /**
      * StructureInfo constructor.
@@ -34,8 +34,8 @@ class StructureInfo
      */
     public function __construct(array $data)
     {
-        $this->material = $data['material'];
-        $this->apartments_count = $data['apartments_count'];
-        $this->porch_count = $data['porch_count'];
+        $this->material = $data['material'] ?? null;
+        $this->apartments_count = $data['apartments_count'] ?? null;
+        $this->porch_count = $data['porch_count'] ?? null;
     }
 }

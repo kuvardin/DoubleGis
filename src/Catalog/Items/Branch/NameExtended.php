@@ -31,13 +31,17 @@ class NameExtended
      * @var string|null Дополнительная информация к названию филиала,
      * которая должна быть показана в развёрнутой карточке
      */
-    public ?string $additional;
+    public ?string $addition;
 
     /**
      * @var string|null Описание филиала
      */
     public ?string $description;
 
+    /**
+     * @var string|null Короткое имя на карте
+     */
+    public ?string $short_name;
     /**
      * NameExtended constructor.
      *
@@ -48,7 +52,8 @@ class NameExtended
         $this->primary = $data['primary'];
         $this->extension = $data['extension'] ?? null;
         $this->legal_name = $data['legal_name'] ?? null;
-        $this->additional = $data['additional'] ?? null;
+        $this->addition = $data['addition'] ?? null;
         $this->description = $data['description'] ?? null;
+        $this->short_name = $data['short_name'] ?? null;
     }
 }

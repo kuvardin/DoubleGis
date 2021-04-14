@@ -13,9 +13,9 @@ namespace Kuvardin\DoubleGis\Catalog\Items\Building;
 class Context
 {
     /**
-     * @var int
+     * @var int|null Расстояние. Считается относительно переданной точки в случае передачи point и radius
      */
-    public int $distance;
+    public ?int $distance;
 
     /**
      * Context constructor.
@@ -24,6 +24,6 @@ class Context
      */
     public function __construct(array $data)
     {
-        $this->distance = $data['distance'];
+        $this->distance = $data['distance'] ?? null;
     }
 }

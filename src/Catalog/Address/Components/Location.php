@@ -15,7 +15,7 @@ use Kuvardin\DoubleGis\Catalog\Address\Component;
 class Location extends Component
 {
     /**
-     * @var string
+     * @var string Словесное описание местоположения строения
      */
     public string $comment;
 

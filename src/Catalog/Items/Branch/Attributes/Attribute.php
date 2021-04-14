@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Kuvardin\DoubleGis\Catalog\Items\Branch\Attributes;
 
 /**
- * Class Attribute
+ * Дополнительные атрибуты
  *
  * @package Kuvardin\DoubleGis\Items\Branch\Attributes
  * @author Maxim Kuvardin <maxim@kuvard.in>

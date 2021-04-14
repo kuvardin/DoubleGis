@@ -53,14 +53,6 @@ class Types
     ];
 
     /**
-     * Types constructor.
-     */
-    private function __construct()
-    {
-
-    }
-
-    /**
      * @param string $type
      * @return bool
      */

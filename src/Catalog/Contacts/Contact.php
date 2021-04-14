@@ -7,7 +7,7 @@ namespace Kuvardin\DoubleGis\Catalog\Contacts;
 use Error;
 
 /**
- * Class Contact
+ * Список контактов
  *
  * @package Kuvardin\DoubleGis\Contacts
  * @author Maxim Kuvardin <maxim@kuvard.in>
@@ -56,7 +56,7 @@ class Contact
     /** ok.ru */
     public const TYPE_ODNOKLASSNIKI = 'odnoklassniki';
 
-    /** Google + */
+    /** Google+ */
     public const TYPE_GOOGLEPLUS = 'googleplus';
 
     /** Linkedin */
