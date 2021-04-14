@@ -7,6 +7,7 @@ namespace Kuvardin\DoubleGis\Catalog\Items;
 use Kuvardin\DoubleGis\Catalog\AdmDivision as AdmDivisionShort;
 use Kuvardin\DoubleGis\Catalog\Flags;
 use Kuvardin\DoubleGis\Catalog\Item;
+use Kuvardin\DoubleGis\Catalog\Items\AdmDivision\Statistics;
 use Kuvardin\DoubleGis\Catalog\Items\Building\Context;
 use Kuvardin\DoubleGis\Catalog\Links\Links;
 use Kuvardin\DoubleGis\Catalog\Reviews\Review;
@@ -23,6 +24,9 @@ use Kuvardin\DoubleGis\Traits\LongId;
  */
 class AdmDivision extends Item
 {
+    /**
+     * Идентификатор административной единицы
+     */
     use LongId;
 
     /**
