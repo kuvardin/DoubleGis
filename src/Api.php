@@ -6,6 +6,7 @@ namespace Kuvardin\DoubleGis;
 
 use Error;
 use GuzzleHttp\Exception\GuzzleException;
+use Kuvardin\DoubleGis\Catalog\Organization;
 use Kuvardin\DoubleGis\Exceptions\ApiError;
 use GuzzleHttp\Client;
 use GuzzleHttp\RequestOptions;
@@ -16,6 +17,7 @@ use Kuvardin\DoubleGis\Geometry\Point;
  *
  * @package Kuvardin\DoubleGis
  * @author Maxim Kuvardin <maxim@kuvard.in>
+ * @contributor Adilet Askarov <overfairy@gmail.com>
  */
 class Api
 {
@@ -92,11 +94,11 @@ class Api
      * Получение коллекции объектов.
      * Осуществляет поиск мест по заданному запросу и выдаёт список результатов, разбитых на страницы.
      *
-     * @param int $region_id Идентификатор региона
+     * @param int|null $region_id Идентификатор региона | Обязателен, если не задано географическое ограничение поиска.
      * @param string|null $query Произвольная поисковая строка
-     * @param int|null $page Номер запрашиваемой страницы
-     * @param int|null $page_size Количество результатов поиска, выводимых на одной странице
-     * @param int[]|null $rubric_ids Идентификаторы категорий. Все категории должны быть из одного региона
+     * @param int|null $page Номер запрашиваемой страницы (по умолчанию = 1)
+     * @param int|null $page_size Количество результатов поиска, выводимых на одной странице (по умолчанию = 20)
+     * @param int[]|null $rubric_ids Идентификаторы категорий. Все категории должны быть из одного региона (необходимо передать region_id)
      * @param string[]|null $types Типы объектов, среди которых производится поиск. При передаче нескольких типов менее
      * релевантные результаты одних типов могут вытесниться более релевантными других типов (Types)
      * @param string[]|null $fields Дополнительные поля, которые необходимо отобразить в ответе (Fields)
@@ -119,17 +121,37 @@ class Api
      * Используется для фильтрации результатов в произвольной области.
      * @param Point|null $viewpoint1 Координаты левой верхней вершины прямоугольной области видимости
      * @param Point|null $viewpoint2 Координаты правой нижней вершины прямоугольной области видимости
+     * @param Organization|null $org_id Фильтр по идентификатору организации, к которой относится компания.
      * @param bool|null $is_viewport_change
+     * @param bool|null $has_photos Фильтр по наличию фотографий. Принимает значения: true или false.
+     * @param bool|null $has_rating Фильтр по наличию рейтинга на flamp.ru. Принимает значения: true или false.
+     * @param bool|null $has_reviews Фильтр по наличию отзывов на flamp.ru. Принимает значения: true или false.
+     * @param bool|null $has_site Фильтр по наличию сайта. Принимает значения: true или false.
+     * @param string|null $work_time Example: work_time=tue,alltime
+     * Время работы организации. Формат: [day],[time] или now (текущий день и время).
+     * Примеры:
+     * Понедельник, 17:00 — mon,17:00
+     * Четверг, 9:00 — thu,09:00
+     * Сегодня, 9:00 — today,09:00
+     * Пятница, весь день — fri,alltime
+     * Сейчас — now
+     * @param string|null $opened_after_date Example: opened_after_date=2001-01-24
+     * Фильтрует компании у которых дата открытия позже чем переданный параметр.
+     * Принимает значения в формате YYYY-MM-DD.
+     * @param bool|null $has_itin Фильтр по наличию индивидуального номера налогоплательщика. Принимает значения: true или false.
+     * @param bool|null $has_trade_license Фильтр по наличию торговой лицензии. Принимает значения true или false.
      * @return Catalog\ItemsList
      * @throws ApiError
      * @throws GuzzleException
      */
-    public function getCatalogItemsByRegion(int $region_id, string $query = null, int $page = null,
+    public function getCatalogItemsByRegion(int $region_id = null, string $query = null, int $page = null,
         int $page_size = null, array $rubric_ids = null, array $types = null, array $fields = null,
         string $search_type = null, string $sort = null, Point $sort_point = null, Point $point = null,
         int $radius = null, array $district_ids = null, array $building_ids = null, array $city_ids = null,
-        string $polygon = null, Point $viewpoint1 = null, Point $viewpoint2 = null,
-        bool $is_viewport_change = null): Catalog\ItemsList
+        string $polygon = null, Point $viewpoint1 = null, Point $viewpoint2 = null, Organization $org_id = null,
+        bool $is_viewport_change = null, bool $has_photos = null, bool $has_rating = null, bool $has_reviews = null,
+        bool $has_site = null, string $work_time = null, string $opened_after_date = null, bool $has_itin = null,
+        bool $has_trade_license = null): Catalog\ItemsList
     {
         $response = $this->request('3.0/items', [
             'locale' => $this->locale,
@@ -147,8 +169,17 @@ class Api
             'polygon' => $polygon,
             'viewpoint1' => $viewpoint1 === null ? null : $viewpoint1->getStringForRequest(),
             'viewpoint2' => $viewpoint2 === null ? null : $viewpoint2->getStringForRequest(),
-            'region_id' => $region_id,
+            'region_id' => $region_id === null ? null : $region_id,
             'is_viewport_change' => $is_viewport_change,
+            'org_id' => $org_id,
+            'has_photos' => $has_photos,
+            'has_rating' => $has_rating,
+            'has_reviews' => $has_reviews,
+            'has_site' => $has_site,
+            'work_time' => $work_time,
+            'opened_after_date' => $opened_after_date,
+            'has_itin' => $has_itin,
+            'has_trade_license' => $has_trade_license,
             'page' => $page,
             'page_size' => $page_size,
             'rubric_id' => $rubric_ids === null ? null : implode(',', $rubric_ids),
