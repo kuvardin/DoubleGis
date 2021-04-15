@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace Kuvardin\DoubleGis\Catalog\Items;
 
 use Kuvardin\DoubleGis\Catalog\AdmDivision as AdmDivisionShort;
+use Kuvardin\DoubleGis\Catalog\Dates;
+use Kuvardin\DoubleGis\Catalog\ExternalContent;
 use Kuvardin\DoubleGis\Catalog\Flags;
 use Kuvardin\DoubleGis\Catalog\Item;
 use Kuvardin\DoubleGis\Catalog\Items\AdmDivision\Statistics;
