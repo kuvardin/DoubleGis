@@ -178,7 +178,11 @@ class AdmDivision extends Item
         $this->is_routing_available = $data['is_routing_available'];
         $this->attraction = $data['attraction'] ?? null;
         $this->city = $data['city'] ?? null;
-        $this->context = $data['context'] ?? null;
+
+        if (isset($data['context'])) {
+            $this->context = new Context($data['context']);
+        }
+
         $this->dates = $data['dates'] ?? null;
 
         if (isset($data['external_content'])) {
