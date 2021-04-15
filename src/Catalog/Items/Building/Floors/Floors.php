@@ -13,17 +13,17 @@ namespace Kuvardin\DoubleGis\Catalog\Items\Building\Floors;
 class Floors
 {
     /**
-     * @var int|null
+     * @var int|null int >= 1
      */
     public ?int $ground_min_count;
 
     /**
-     * @var int
+     * @var int int >= 1
      */
     public int $ground_count;
 
     /**
-     * @var int|null
+     * @var int|null int >= 1
      */
     public ?int $underground_count;
 

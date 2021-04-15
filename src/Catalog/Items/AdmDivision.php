@@ -12,7 +12,7 @@ use Kuvardin\DoubleGis\Catalog\Item;
 use Kuvardin\DoubleGis\Catalog\Items\AdmDivision\Statistics;
 use Kuvardin\DoubleGis\Catalog\Items\Building\Context;
 use Kuvardin\DoubleGis\Catalog\Links\Links;
-use Kuvardin\DoubleGis\Catalog\Reviews\Review;
+use Kuvardin\DoubleGis\Catalog\Items\AdmDivision\Review;
 use Kuvardin\DoubleGis\Catalog\SearchAttributes;
 use Kuvardin\DoubleGis\Geometry\Geometry;
 use Kuvardin\DoubleGis\Geometry\Point;

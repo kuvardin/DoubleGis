@@ -4,7 +4,8 @@ declare(strict_types=1);
 
 namespace Kuvardin\DoubleGis\Catalog\Contacts;
 
-use Kuvardin\DoubleGis\Catalog\Shedule\Schedule;
+
+use Kuvardin\DoubleGis\Catalog\Schedule\Schedule;
 
 /**
  * Контакты филиала

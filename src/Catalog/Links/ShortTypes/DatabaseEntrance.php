@@ -22,35 +22,19 @@ class DatabaseEntrance
     public string $id;
 
     /**
-     * @var string|null Описание входа
-     */
-    public ?string $name;
-
-    /**
-     * @var string|null Комментарий ко входу
-     */
-    public ?string $comment;
-
-    /**
-     * @var string|null Номер входа
-     */
-    public ?string $entrance_display_name;
-
-    /**
      * @var bool Является ли вход основным
      */
     public bool $is_primary;
 
     /**
-     * @var bool|null Если присутствует и равен true, то вход отображается в списке входов
+     * @var Geometry Геометрия входа
      */
-    public ?bool $is_visible_on_map;
+    public Geometry $geometry;
 
     /**
-     * @var bool|null Отсутствуют для входов без квартир.
-     * Должны полностью совпадать для входов, имеющих одинаковое название
+     * @var ApartmentsInfo|null Информация о квартирах в доме
      */
-    public ?bool $is_visible_in_ui;
+    public ?ApartmentsInfo $apartments_info;
 
     /**
      * @var bool|null Если присутствует и равен true, то для этого входа на карте отображаются poi
@@ -63,24 +47,40 @@ class DatabaseEntrance
     public ?string $entity_name;
 
     /**
+     * @var string|null Комментарий ко входу
+     */
+    public ?string $comment;
+
+    /**
+     * @var string|null Номер входа
+     */
+    public ?string $entrance_display_name;
+
+    /**
+     * @var bool|null Отсутствуют для входов без квартир.
+     * Должны полностью совпадать для входов, имеющих одинаковое название
+     */
+    public ?bool $is_visible_in_ui;
+
+    /**
      * @var string|null Номер подъезда
      */
     public ?string $entity_number;
 
     /**
-     * @var ApartmentsInfo|null Информация о квартирах в доме
-     */
-    public ?ApartmentsInfo $apartments_info;
-
-    /**
-     * @var Geometry Геометрия входа
-     */
-    public Geometry $geometry;
-
-    /**
      * @var RelativeGeometry|null Отсутствует для входов со сложной геометрией
      */
     public ?RelativeGeometry $relative_geometry;
+
+    /**
+     * @var string|null Описание входа
+     */
+    public ?string $name;
+
+    /**
+     * @var bool|null Если присутствует и равен true, то вход отображается в списке входов
+     */
+    public ?bool $is_visible_on_map;
 
     /**
      * DatabaseEntrance constructor.

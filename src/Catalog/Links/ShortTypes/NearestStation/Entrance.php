@@ -15,24 +15,24 @@ use Kuvardin\DoubleGis\Geometry\Geometry;
 class Entrance
 {
     /**
-     * @var string Уникальный идентификатор входа
-     */
-    public string $id;
-
-    /**
      * @var string Описание входа
      */
     public string $name;
 
     /**
-     * @var string Номер входа на станцию, если объект является входом
+     * @var string|null Уникальный идентификатор входа
      */
-    public string $entrance_display_name;
+    public ?string $id;
 
     /**
-     * @var Geometry Геометрия входа
+     * @var string|null Номер входа на станцию, если объект является входом
      */
-    public Geometry $geometry;
+    public ?string $entrance_display_name;
+
+    /**
+     * @var Geometry|null Геометрия входа
+     */
+    public ?Geometry $geometry;
 
     /**
      * Entrance constructor.
@@ -41,9 +41,9 @@ class Entrance
      */
     public function __construct(array $data)
     {
-        $this->id = $data['id'];
         $this->name = $data['name'];
-        $this->entrance_display_name = $data['entrance_display_name'];
-        $this->geometry = new Geometry($data['geometry']);
+        $this->id = $data['id'] ?? null;
+        $this->entrance_display_name = $data['entrance_display_name'] ?? null;
+        $this->geometry = new Geometry($data['geometry']) ?? null;
     }
 }

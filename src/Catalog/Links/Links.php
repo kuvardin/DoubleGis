@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kuvardin\DoubleGis\Catalog\Links;
 
 use Kuvardin\DoubleGis\Catalog\Items\Building\Attraction;
+use Kuvardin\DoubleGis\Catalog\Links\Servicing\Servicing;
 use Kuvardin\DoubleGis\Catalog\Links\ShortTypes\Branches;
 use Kuvardin\DoubleGis\Catalog\Links\ShortTypes\BranchesShort;
 use Kuvardin\DoubleGis\Catalog\Links\ShortTypes\DatabaseEntrance;
@@ -38,9 +39,9 @@ class Links
     public ?Branches $branches = null;
 
     /**
-     * @var Branches|null Обслуживающие организации
+     * @var Servicing|null Обслуживающие организации
      */
-    public ?Branches $servicing = null;
+    public ?Servicing $servicing = null;
 
     /**
      * @var Branches|null Провайдеры

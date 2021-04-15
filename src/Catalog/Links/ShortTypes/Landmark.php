@@ -77,24 +77,9 @@ class Landmark
     public string $type;
 
     /**
-     * @var string Подтип объекта. Для места — self::SUBTYPE_PLACE. Для остановочной платформы - self::SUBTYPE_*
-     */
-    public string $subtype;
-
-    /**
-     * @var string ID остановки для типов «остановочная платформа», «вход в метро»
-     */
-    public string $station_id;
-
-    /**
      * @var string Название объекта
      */
     public string $name;
-
-    /**
-     * @var string Номер входа
-     */
-    public string $entrance_display_name;
 
     /**
      * @var string Расстояние от описываемого объекта до ближайшей остановочной платформы данной остановки в метрах
@@ -102,9 +87,24 @@ class Landmark
     public string $distance;
 
     /**
-     * @var int Азимут до объекта [0-360]
+     * @var string|null Подтип объекта. Для места — self::SUBTYPE_PLACE. Для остановочной платформы - self::SUBTYPE_*
      */
-    public int $azimuth;
+    public ?string $subtype;
+
+    /**
+     * @var string|null ID остановки для типов «остановочная платформа», «вход в метро»
+     */
+    public ?string $station_id;
+
+    /**
+     * @var string|null Номер входа
+     */
+    public ?string $entrance_display_name;
+
+    /**
+     * @var int|null Азимут до объекта [0-360]
+     */
+    public ?int $azimuth;
 
     /**
      * Landmark constructor.
@@ -115,11 +115,11 @@ class Landmark
     {
         $this->id = $data['id'];
         $this->type = $data['type'];
-        $this->subtype = $data['subtype'];
-        $this->station_id = $data['station_id'];
         $this->name = $data['name'];
-        $this->entrance_display_name = $data['entrance_display_name'];
         $this->distance = $data['distance'];
-        $this->azimuth = $data['azimuth'];
+        $this->subtype = $data['subtype'] ?? null;
+        $this->station_id = $data['station_id'] ?? null;
+        $this->entrance_display_name = $data['entrance_display_name'] ?? null;
+        $this->azimuth = $data['azimuth'] ?? null;
     }
 }

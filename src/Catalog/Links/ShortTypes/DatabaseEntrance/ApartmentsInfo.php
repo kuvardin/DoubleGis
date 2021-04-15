@@ -13,12 +13,6 @@ namespace Kuvardin\DoubleGis\Catalog\Links\ShortTypes\DatabaseEntrance;
 class ApartmentsInfo
 {
     /**
-     * @var string Номер дома, к которому относится вход.
-     * Выгружается только в случае, когда подъезды имеют свои отдельные адреса
-     */
-    public string $building_number;
-
-    /**
      * @var bool true, если распределение квартир по этажам было произведено автоматически
      */
     public bool $calculated;
@@ -29,14 +23,20 @@ class ApartmentsInfo
     public Floors $floors;
 
     /**
+     * @var string|null Номер дома, к которому относится вход.
+     * Выгружается только в случае, когда подъезды имеют свои отдельные адреса
+     */
+    public ?string $building_number;
+
+    /**
      * ApartmentsInfo constructor.
      *
      * @param array $data
      */
     public function __construct(array $data)
     {
-        $this->building_number = $data['building_number'];
         $this->calculated = $data['calculated'];
         $this->floors = new Floors($data['floors']);
+        $this->building_number = $data['building_number'] ?? null;
     }
 }

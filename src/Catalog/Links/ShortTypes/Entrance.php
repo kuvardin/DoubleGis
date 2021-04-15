@@ -20,19 +20,14 @@ class Entrance
     public string $id;
 
     /**
-     * @var string|null Комментарий ко входу
-     */
-    public ?string $comment;
-
-    /**
      * @var bool Является ли вход основным
      */
     public bool $is_primary;
 
     /**
-     * @var bool|null Если присутствует и равен true, то вход отображается в списке входов
+     * @var Geometry Геометрия входа
      */
-    public ?bool $is_visible_on_map = null;
+    public Geometry $geometry;
 
     /**
      * @var bool|null Отсутствуют для входов без квартир.
@@ -41,24 +36,29 @@ class Entrance
     public ?bool $is_visible_in_ui;
 
     /**
-     * @var string|null Непустое имя подъезда
-     */
-    public ?string $entity_name;
-
-    /**
-     * @var string|null Номер подъезда
-     */
-    public ?string $entity_number;
-
-    /**
      * @var string|null Номер входа на станцию, если объект является входом
      */
     public ?string $entrance_display_name;
 
     /**
-     * @var Geometry Геометрия входа
+     * @var string|null Непустое имя подъезда
      */
-    public Geometry $geometry;
+    public ?string $entity_name;
+
+    /**
+     * @var string|null Комментарий ко входу
+     */
+    public ?string $comment;
+
+    /**
+     * @var bool|null Если присутствует и равен true, то вход отображается в списке входов
+     */
+    public ?bool $is_visible_on_map = null;
+
+    /**
+     * @var string|null Номер подъезда
+     */
+    public ?string $entity_number;
 
     /**
      * Entrance constructor.

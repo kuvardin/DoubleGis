@@ -25,22 +25,6 @@ class NearestStation
     public string $name;
 
     /**
-     * @var string|null Дополнительный комментарий к названию остановки, например название линии (или линий) метро,
-     * к которым относится станция
-     */
-    public ?string $comment;
-
-    /**
-     * @var string|null Присутствует, если применяется цветовое кодирование, например в случае станций метро
-     */
-    public ?string $color = null;
-
-    /**
-     * @var string|null Иконка метро
-     */
-    public ?string $route_logo;
-
-    /**
      * @var string[] Массив типов транспорта, проходящего через эту остановку (Routes\RouteTypes::*)
      */
     public array $route_types;
@@ -51,14 +35,30 @@ class NearestStation
     public int $distance;
 
     /**
+     * @var NearestStationEntrance|null Вход
+     */
+    public ?NearestStationEntrance $entrance;
+
+    /**
+     * @var string|null Дополнительный комментарий к названию остановки, например название линии (или линий) метро,
+     * к которым относится станция
+     */
+    public ?string $comment;
+
+    /**
      * @var bool|null Существует ли внутренний переход на эту станцию из описываемого объекта
      */
     public ?bool $internal_transition;
 
     /**
-     * @var NearestStationEntrance|null Вход
+     * @var string|null Иконка метро
      */
-    public ?NearestStationEntrance $entrance;
+    public ?string $route_logo;
+
+    /**
+     * @var string|null Присутствует, если применяется цветовое кодирование, например в случае станций метро
+     */
+    public ?string $color = null;
 
     /**
      * NearestStation constructor.

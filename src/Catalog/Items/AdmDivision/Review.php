@@ -1,10 +1,12 @@
 <?php
 
 
-namespace Kuvardin\DoubleGis\Catalog\Reviews;
+namespace Kuvardin\DoubleGis\Catalog\Items\AdmDivision;
+
+use Kuvardin\DoubleGis\Catalog\Reviews\Item;
 
 /**
- * Отзывы о геообъекте.
+ * Отзывы о геообъекте. (AdmDiv)
  *
  * @package Kuvardin\DoubleGis\Catalog\Reviews
  */

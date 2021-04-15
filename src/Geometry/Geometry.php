@@ -15,19 +15,19 @@ use Error;
 class Geometry
 {
     /**
-     * @var GeometryItem Визуальный центр геометрии объекта
+     * @var GeometryItem|null Визуальный центр геометрии объекта
      */
-    public GeometryItem $centroid;
+    public ?GeometryItem $centroid;
 
     /**
-     * @var GeometryItem Геометрия области, используемой для определения попадания курсора в зону объекта
+     * @var GeometryItem|null Геометрия области, используемой для определения попадания курсора в зону объекта
      */
-    public GeometryItem $hover;
+    public ?GeometryItem $hover;
 
     /**
-     * @var GeometryItem Геометрия для выделения объекта
+     * @var GeometryItem|null Геометрия для выделения объекта
      */
-    public GeometryItem $selection;
+    public ?GeometryItem $selection;
 
     /**
      * @var string|null Идентификатор стиля для отображения
@@ -41,14 +41,14 @@ class Geometry
      */
     public function __construct(array $data)
     {
-        $this->centroid = self::getItemFromString($data['centroid']);
-        $this->hover = self::getItemFromString($data['hover']);
-        $this->selection = self::getItemFromString($data['selection']);
+        $this->centroid = self::getItemFromString($data['centroid']) ?? null;
+        $this->hover = self::getItemFromString($data['hover']) ?? null;
+        $this->selection = self::getItemFromString($data['selection']) ?? null;
         $this->style = $data['style'] ?? null;
     }
 
     /**
-     * @param string $string
+     * @param string|$string $string
      * @return GeometryItem
      */
     public static function getItemFromString(string $string): GeometryItem

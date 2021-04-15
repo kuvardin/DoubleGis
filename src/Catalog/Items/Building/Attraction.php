@@ -28,14 +28,14 @@ class Attraction
     public string $name;
 
     /**
-     * @var string|null Описание достопримечательности
-     */
-    public ?string $description;
-
-    /**
      * @var string|null Дата или даты
      */
     public ?string $dates;
+
+    /**
+     * @var string|null Описание достопримечательности
+     */
+    public ?string $description;
 
     /**
      * @var string|null Авторы
@@ -52,8 +52,8 @@ class Attraction
         $this->id = $data['id'];
         $this->subtype_name = $data['subtype_name'];
         $this->name = $data['name'];
-        $this->description = $data['description'] ?? null;
         $this->dates = $data['dates'] ?? null;
+        $this->description = $data['description'] ?? null;
         $this->authors = $data['authors'] ?? null;
     }
 }

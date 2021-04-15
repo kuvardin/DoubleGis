@@ -16,19 +16,19 @@ use Kuvardin\DoubleGis\Geometry\Point;
 class Geometry
 {
     /**
-     * @var Point[]
+     * @var Point[] Точки
      */
     public array $points = [];
 
     /**
-     * @var LineString[]
+     * @var LineString[]|null Векторы
      */
-    public array $vectors = [];
+    public ?array $vectors = [];
 
     /**
-     * @var LineString[]
+     * @var LineString[]|null Нормали
      */
-    public array $normals = [];
+    public ?array $normals = [];
 
     /**
      * Geometry constructor.

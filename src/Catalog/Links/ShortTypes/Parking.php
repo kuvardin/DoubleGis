@@ -37,19 +37,19 @@ class Parking
     public string $purpose;
 
     /**
-     * @var string Вместимость парковки (количество машиномест)
-     */
-    public string $capacity;
-
-    /**
      * @var bool Является ли парковка платной
      */
     public bool $is_paid;
 
     /**
-     * @var string Дополнительное описание
+     * @var string|null Вместимость парковки (количество машиномест)
      */
-    public string $comment;
+    public ?string $capacity;
+
+    /**
+     * @var string|null Дополнительное описание
+     */
+    public ?string $comment;
 
     /**
      * Parking constructor.
@@ -61,8 +61,8 @@ class Parking
         $this->id = $data['id'] ?? null;
         $this->name = $data['name'];
         $this->purpose = $data['purpose'];
-        $this->capacity = $data['capacity'];
         $this->is_paid = $data['is_paid'];
-        $this->comment = $data['comment'];
+        $this->capacity = $data['capacity'] ?? null;
+        $this->comment = $data['comment'] ?? null;
     }
 }
