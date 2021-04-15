@@ -19,16 +19,6 @@ class Flags
     public const CLOSURE_REASON_OPENING_SOON = 'opening_soon';
 
     /**
-     * @var bool|null Есть ли для объекта фотографии
-     */
-    public ?bool $photos;
-
-    /**
-     * @var Badge[] Список бейджей
-     */
-    public array $badges = [];
-
-    /**
      * @var bool|null Заполняется только для type=city и принимает единственное значение true в случае,
      * если город является главным городом текущего проекта (например Новосибирск)
      */
@@ -56,6 +46,11 @@ class Flags
      * @var TempClosedParam[]|null Дополнительные сведения о временно не работающем филиале
      */
     public ?array $temporary_closed_parameters;
+
+    /**
+     * @var bool|null Есть ли для объекта фотографии
+     */
+    public ?bool $photos;
 
     /**
      * Flags constructor.

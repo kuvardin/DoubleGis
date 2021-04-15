@@ -13,16 +13,6 @@ namespace Kuvardin\DoubleGis\Catalog\Items\Branch\Attributes;
 class Group
 {
     /**
-     * @var string|null Адрес иконки
-     */
-    public ?string $icon_url;
-
-    /**
-     * @var string|null Название группы дополнительных атрибутов
-     */
-    public ?string $name;
-
-    /**
      * @var bool Признак того, что есть пересечение между контекстными рубриками и рубриками дополнительных
      * атрибутов этой группы
      */
@@ -43,6 +33,16 @@ class Group
      * @var Attribute[] Список допоплнительных атрибутов в данной группе
      */
     public array $attributes;
+
+    /**
+     * @var string|null Адрес иконки
+     */
+    public ?string $icon_url;
+
+    /**
+     * @var string|null Название группы дополнительных атрибутов
+     */
+    public ?string $name;
 
     /**
      * Group constructor.
