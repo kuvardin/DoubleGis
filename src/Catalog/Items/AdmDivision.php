@@ -32,6 +32,22 @@ class AdmDivision extends Item
     use LongId;
 
     /**
+     * @var string Подтип административной единицы (AdmDivision\Types::*)
+     */
+    public string $subtype;
+
+    /**
+     * @var string Название территории
+     * (для использования в функционале «поделиться», для конечных точек маршрута и т. д.)
+     */
+    public string $caption;
+
+    /**
+     * @var string Название территории
+     */
+    public string $name;
+
+    /**
      * @var string|null Идентификатор региона
      */
     public ?string $region_id;
@@ -42,65 +58,9 @@ class AdmDivision extends Item
     public ?string $segment_id;
 
     /**
-     * @var string Подтип административной единицы (AdmDivision\Types::*)
-     */
-    public string $subtype;
-
-    /**
-     * @var Flags|null Список признаков объекта
-     */
-    public ?Flags $flags = null;
-
-    /**
-     * @var Context|null
-     */
-    public ?Context $context = null;
-
-    /**
-     * @var string|null Алиас города, в котором находится объект
-     */
-    public ?string $city;
-
-    /**
-     * @var string|null Текущая локаль
-     */
-    public ?string $locale;
-
-    /**
-     * @var string|null Локализованное название типа населённого пункта (только для subtype = settlement)
-     */
-    public ?string $subtype_specification;
-
-    /**
-     * @var bool|null Признак того, что это главный объект в группе объектов гибрида
-     */
-    public ?bool $is_main_in_group;
-
-    /**
-     * @var string|null Название территории
-     * (для использования в функционале «поделиться», для конечных точек маршрута и т. д.)
-     */
-    public ?string $caption;
-
-    /**
-     * @var string Название территории
-     */
-    public string $name;
-
-    /**
      * @var string|null Полное название территории
      */
     public ?string $full_name;
-
-    /**
-     * @var string|null Описание
-     */
-    public ?string $description;
-
-    /**
-     * @var bool|null Если true, то проезд до объекта возможен, если false или отсутствует, то нет.
-     */
-    public ?bool $is_routing_available;
 
     /**
      * @var AdmDivisionShort[]|null Принадлежность к административной территории более высокого уровня
@@ -108,14 +68,34 @@ class AdmDivision extends Item
     public ?array $adm_divs;
 
     /**
+     * @var string|null Алиас города, в котором находится объект
+     */
+    public ?string $city_alias;
+
+    /**
+     * @var Context|null
+     */
+    public ?Context $context = null;
+
+    /**
+     * @var Flags|null Список признаков объекта
+     */
+    public ?Flags $flags = null;
+
+    /**
+     * @var string|null Текущая локаль
+     */
+    public ?string $locale;
+
+    /**
+     * @var bool|null Если true, то проезд до объекта возможен, если false или отсутствует, то нет.
+     */
+    public ?bool $is_routing_available;
+
+    /**
      * @var Links|null Связанные объекты
      */
     public ?Links $links;
-
-    /**
-     * @var Review|null Отзывы о геообъекте.
-     */
-    public ?Review $reviews = null;
 
     /**
      * @var Point|null Координаты точки поиска, заданные в системе координат WGS84 в формате lon, lat.
@@ -123,14 +103,29 @@ class AdmDivision extends Item
     public ?Point $point = null;
 
     /**
-     * @var SearchAttributes|null Подсказка, соответствующая запросу. Поле доступно только в методах автодополнения.
+     * @var string|null Локализованное название типа населённого пункта (только для subtype = settlement)
      */
-    public ?SearchAttributes $search_attributes;
+    public ?string $subtype_specification;
+
+    /**
+     * @var string|null Описание
+     */
+    public ?string $description;
+
+    /**
+     * @var Review|null Отзывы о геообъекте.
+     */
+    public ?Review $reviews = null;
 
     /**
      * @var Attraction|null Описание достопримечательности.
      */
     public ?Attraction $attraction;
+
+    /**
+     * @var SearchAttributes|null Подсказка, соответствующая запросу. Поле доступно только в методах автодополнения.
+     */
+    public ?SearchAttributes $search_attributes;
 
     /**
      * @var Statistics|null Сводная информация об административной единице.
@@ -166,57 +161,12 @@ class AdmDivision extends Item
     {
         parent::__construct($data);
         $this->setId($data['id']);
+        $this->subtype = $data['subtype'];
+        $this->caption = $data['caption'];
+        $this->name = $data['name'];
         $this->region_id = $data['region_id'];
         $this->segment_id = $data['segment_id'] ?? null;
-        $this->subtype = $data['subtype'];
-        $this->subtype_specification = $data['subtype_specification'] ?? null;
-        $this->is_main_in_group = $data['is_main_in_group'] ?? null;
-        $this->name = $data['name'];
-        $this->caption = $data['caption'] ?? null;
         $this->full_name = $data['full_name'];
-        $this->description = $data['description'] ?? null;
-        $this->is_routing_available = $data['is_routing_available'];
-        $this->attraction = $data['attraction'] ?? null;
-        $this->city = $data['city'] ?? null;
-
-        if (isset($data['context'])) {
-            $this->context = new Context($data['context']);
-        }
-
-        $this->dates = $data['dates'] ?? null;
-
-        if (isset($data['external_content'])) {
-            $this->external_content = [];
-            foreach ($data['external_content'] as $external_content_data) {
-                $this->external_content[] = new ExternalContent($external_content_data);
-            }
-        }
-
-        if (isset($data['flags'])) {
-            $this->flags = new Flags($data['flags']);
-        }
-
-        if (isset($data['geometry'])) {
-            $this->geometry = new Geometry($data['geometry']);
-        }
-
-        $this->links = $data['links'] ?? null;
-        $this->locale = $data['locale'] ?? null;
-
-        if (isset($data['point'])) {
-            $this->point = Point::fromArray($data['point']);
-        }
-
-        if (isset($data['reviews'])) {
-            $this->reviews = new Review($data['reviews']);
-        }
-
-        $this->search_attributes = $data['search_attributes'] ?? null;
-        $this->sources = $data['sources'] ?? null;
-
-        if (isset($data['statistics'])) {
-            $this->statistics = new Statistics($data['statistics']);
-        }
 
         if (isset($data['adm_div'])) {
             $this->adm_divs = [];
@@ -224,6 +174,29 @@ class AdmDivision extends Item
                 $this->adm_divs[] = new AdmDivisionShort($adm_div_data);
             }
         }
+
+        $this->city_alias = $data['city_alias'] ?? null;
+        $this->context = isset($data['context']) ? new Context($data['context']) : null;
+        $this->flags = isset($data['flags']) ? new Flags($data['flags']) : null;
+        $this->locale = $data['locale'] ?? null;
+        $this->is_routing_available = $data['is_routing_available'];
+        $this->links = $data['links'] ?? null;
+        $this->point = isset($data['point']) ? Point::fromArray($data['point']) : null;
+        $this->subtype_specification = $data['subtype_specification'] ?? null;
+        $this->description = $data['description'] ?? null;
+        $this->reviews = isset($data['reviews']) ? new Review($data['reviews']) : null;
+        $this->attraction = isset($data['attraction']) ? new Attraction($data['attraction']) : null;
+        $this->search_attributes = $data['search_attributes'] ?? null;
+        $this->statistics = isset($data['statistics']) ? new Statistics($data['statistics']) : null;
+        $this->geometry = isset($data['geometry']) ? new Geometry($data['geometry']) : null;
+        $this->sources = $data['sources'] ?? null;
+        if (isset($data['external_content'])) {
+            $this->external_content = [];
+            foreach ($data['external_content'] as $external_content_data) {
+                $this->external_content[] = new ExternalContent($external_content_data);
+            }
+        }
+        $this->dates = $data['dates'] ?? null;
     }
 
     /**
