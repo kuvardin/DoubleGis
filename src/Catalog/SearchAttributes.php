@@ -7,7 +7,7 @@ namespace Kuvardin\DoubleGis\Catalog;
 use Kuvardin\DoubleGis\Suggests\Part;
 
 /**
- * Class SearchAttributes
+ * Подсказка, соответствующая запросу. Поле доступно только в методах автодополнения.
  *
  * @package Kuvardin\DoubleGis
  * @author Maxim Kuvardin <maxim@kuvard.in>
@@ -15,27 +15,12 @@ use Kuvardin\DoubleGis\Suggests\Part;
 class SearchAttributes
 {
     /**
-     * @var int
-     */
-    public int $dgis_source_type;
-
-    /**
-     * @var int
-     */
-    public int $handling_type;
-
-    /**
-     * @var float
-     */
-    public float $personal_priority;
-
-    /**
-     * @var string
+     * @var string Строка подсказки для suggest.
      */
     public string $suggested_text;
 
     /**
-     * @var Part[]
+     * @var Part[] Размеченная часть подсказки.
      */
     public array $suggest_parts;
 
@@ -46,10 +31,6 @@ class SearchAttributes
      */
     public function __construct(array $data)
     {
-        $this->dgis_source_type = $data['dgis_source_type'];
-        $this->handling_type = $data['handling_type'];
-        $this->personal_priority = $data['personal_priority'];
-
         $this->suggest_parts = [];
         foreach ($data['suggest_parts'] as $suggest_part_data) {
             $this->suggest_parts[] = new Part($suggest_part_data);
