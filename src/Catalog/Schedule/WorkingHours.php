@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Kuvardin\DoubleGis\Catalog\Shedule;
+namespace Kuvardin\DoubleGis\Catalog\Schedule;
 
 use Error;
 
 /**
  * Class WorkingHours
  *
- * @package Kuvardin\DoubleGis\Shedule
+ * @package Kuvardin\DoubleGis\Schedule
  * @author Maxim Kuvardin <maxim@kuvard.in>
  */
 class WorkingHours

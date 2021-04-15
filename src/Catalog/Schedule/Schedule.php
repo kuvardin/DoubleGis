@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Kuvardin\DoubleGis\Catalog\Shedule;
+namespace Kuvardin\DoubleGis\Catalog\Schedule;
 
 /**
- * Class Shedule
+ * Class Sсhedule
  *
- * @package Shedule
+ * @package Sсhedule
  * @author Maxim Kuvardin <maxim@kuvard.in>
  */
-class Shedule
+class Schedule
 {
     /**
      * @var WeekDay[]
@@ -45,7 +45,7 @@ class Shedule
     public ?string $date_to;
 
     /**
-     * Shedule constructor.
+     * Schedule constructor.
      *
      * @param array $data
      */

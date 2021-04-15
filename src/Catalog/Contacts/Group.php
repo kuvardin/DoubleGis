@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Kuvardin\DoubleGis\Catalog\Contacts;
 
-use Kuvardin\DoubleGis\Catalog\Shedule\Shedule;
+use Kuvardin\DoubleGis\Catalog\Shedule\Schedule;
 
 /**
  * Контакты филиала
@@ -25,9 +25,9 @@ class Group
     public ?string $comment;
 
     /**
-     * @var Shedule|null Расписание группы контактов
+     * @var Schedule|null Расписание группы контактов
      */
-    public ?Shedule $schedule;
+    public ?Schedule $schedule;
 
     /**
      * @var Contact[] Список контактов
@@ -43,7 +43,7 @@ class Group
     {
         $this->name = $data['name'] ?? null;
         $this->comment = $data['comment'] ?? null;
-        $this->schedule = isset($data['shedule']) ? new Shedule($data['shedule']) : null;
+        $this->schedule = isset($data['shedule']) ? new Schedule($data['shedule']) : null;
         $this->contacts = array_map(static fn($contact_data) => new Contact($contact_data), $data['contacts']);
     }
 
