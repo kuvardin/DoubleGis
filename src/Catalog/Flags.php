@@ -52,7 +52,10 @@ class Flags
      */
     public ?string $temporary_closed;
 
-//     TODO: public array $temporary_closed_parameters;
+    /**
+     * @var TempClosedParam[]|null Дополнительные сведения о временно не работающем филиале
+     */
+    public ?array $temporary_closed_parameters;
 
     /**
      * Flags constructor.
@@ -67,10 +70,17 @@ class Flags
             $this->badges = array_map(static fn($badge_data) => new Badge($badge_data), $data['badges']);
         }
 
-        $this->is_default = $data['is_default'];
+        $this->is_default = $data['is_default'] ?? null;
         $this->is_region_center = $data['is_region_center'] ?? null;
         $this->is_district_area_center = $data['is_district_area_center'] ?? null;
         $this->temporary_closed = $data['temporary_closed'] ?? null;
-//        $this->temporary_closed_parameters = $data['temporary_closed_parameters'];
+        $this->temporary_closed_parameters = $data['temporary_closed_parameters'] ?? null;
+
+        if (isset($data['temporary_closed_parameters'])) {
+            $this->temporary_closed_parameters = [];
+            foreach ($data['temporary_closed_parameters'] as $temp_closed_param_data) {
+                $this->temporary_closed_parameters[] = new TempClosedParam($temp_closed_param_data);
+            }
+        }
     }
 }
