@@ -319,11 +319,7 @@ class Branch extends Item
             ? array_map(static fn($order_with_cart_data) => new OrderWithCart($order_with_cart_data), $data['order_with_cart'])
             : null;
         $this->is_deleted = $data['is_deleted'] ?? false;
-
-        if (isset($data['point'])) {
-            $this->point = Point::fromArray($data['point']);
-        }
-
+        $this->point = (isset($data['point'])) ? Point::fromArray($data['point']) : null;
         $this->city_alias = $data['city_alias'] ?? null;
         $this->name = $data['name'] ?? null;
         $this->attribute_groups = isset($data['attribute_groups'])
