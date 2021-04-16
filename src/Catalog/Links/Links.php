@@ -125,7 +125,7 @@ class Links
         }
 
         $this->branches = isset($data['branches']) ? new Branches($data['branches']) : null;
-        $this->servicing = isset($data['servicing']) ? new Branches($data['servicing']) : null;
+        $this->servicing = isset($data['servicing']) ? new Servicing($data['servicing']) : null;
         $this->providers = isset($data['providers']) ? new Branches($data['providers']) : null;
         $this->airports = isset($data['airports']) ? new BranchesShort($data['airports']) : null;
 

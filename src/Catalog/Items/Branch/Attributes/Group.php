@@ -25,9 +25,9 @@ class Group
     public bool $is_primary;
 
     /**
-     * @var string[] Массив идентификаторов рубрик, связанных с группой дополнительных атрибутов
+     * @var string[]|null Массив идентификаторов рубрик, связанных с группой дополнительных атрибутов
      */
-    public array $rubric_ids;
+    public ?array $rubric_ids;
 
     /**
      * @var Attribute[] Список допоплнительных атрибутов в данной группе
@@ -55,7 +55,7 @@ class Group
         $this->name = $data['name'] ?? null;
         $this->is_context = $data['is_context'];
         $this->is_primary = $data['is_primary'];
-        $this->rubric_ids = $data['rubrics_ids'];
+        $this->rubric_ids = $data['rubrics_ids'] ?? null;
         $this->attributes = array_map(static fn($attr_data) => new Attribute($attr_data), $data['attributes']);
     }
 }

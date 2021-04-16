@@ -13,7 +13,7 @@ use Kuvardin\DoubleGis\Catalog\Items\Building\Context;
 use Kuvardin\DoubleGis\Catalog\Items\Building\Floors\Floors;
 use Kuvardin\DoubleGis\Catalog\Items\Building\Floors\Plans;
 use Kuvardin\DoubleGis\Catalog\Items\Building\StructureInfo;
-use Kuvardin\DoubleGis\Catalog\Links\Servicing\Links;
+use Kuvardin\DoubleGis\Catalog\Links\Links;
 use Kuvardin\DoubleGis\Geometry\Geometry;
 use Kuvardin\DoubleGis\Geometry\Point;
 use Kuvardin\DoubleGis\Traits\LongId;

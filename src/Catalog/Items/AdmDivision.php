@@ -37,10 +37,10 @@ class AdmDivision extends Item
     public string $subtype;
 
     /**
-     * @var string Название территории
+     * @var string|null Название территории
      * (для использования в функционале «поделиться», для конечных точек маршрута и т. д.)
      */
-    public string $caption;
+    public ?string $caption;
 
     /**
      * @var string Название территории
@@ -162,7 +162,7 @@ class AdmDivision extends Item
         parent::__construct($data);
         $this->setId($data['id']);
         $this->subtype = $data['subtype'];
-        $this->caption = $data['caption'];
+        $this->caption = $data['caption'] ?? null;
         $this->name = $data['name'];
         $this->region_id = $data['region_id'];
         $this->segment_id = $data['segment_id'] ?? null;
