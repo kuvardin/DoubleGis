@@ -9,7 +9,6 @@ use Kuvardin\DoubleGis\Catalog\AdmDivision;
 use Kuvardin\DoubleGis\Catalog\Dates;
 use Kuvardin\DoubleGis\Catalog\ExternalContent;
 use Kuvardin\DoubleGis\Catalog\Flags;
-use Kuvardin\DoubleGis\Catalog\Groups\Group;
 use Kuvardin\DoubleGis\Catalog\Item;
 use Kuvardin\DoubleGis\Catalog\Items\AdmDivision\Review;
 use Kuvardin\DoubleGis\Catalog\Items\Building\Attraction;
