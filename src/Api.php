@@ -349,6 +349,7 @@ class Api
         }
 
         $url .= '?' . http_build_query($get);
+        echo $url, PHP_EOL;
 
         $response = $this->client->get($url, [
             RequestOptions::CONNECT_TIMEOUT => $this->connection_timeout ?? self::CONNECTION_TIMEOUT_DEFAULT,
