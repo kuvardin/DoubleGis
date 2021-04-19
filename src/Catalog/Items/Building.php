@@ -192,7 +192,7 @@ class Building extends Item
     {
         parent::__construct($data);
         $this->setId($data['id']);
-        $this->caption = $data['caption'];
+        $this->caption = $data['caption'] ?? null;
         $this->purpose_name = $data['purpose_name'];
         $this->region_id = $data['region_id'] ?? null;
         $this->segment_id = $data['segment_id'] ?? null;
