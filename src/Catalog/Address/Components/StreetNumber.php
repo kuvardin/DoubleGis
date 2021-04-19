@@ -15,9 +15,9 @@ use Kuvardin\DoubleGis\Catalog\Address\Component;
 class StreetNumber extends Component
 {
     /**
-     * @var string Идентификатор улицы
+     * @var string|null Идентификатор улицы
      */
-    public string $street_id;
+    public ?string $street_id;
 
     /**
      * @var string Название улицы
@@ -37,7 +37,7 @@ class StreetNumber extends Component
     public function __construct(array $data)
     {
         parent::__construct($data);
-        $this->street_id = $data['street_id'];
+        $this->street_id = $data['street_id'] ?? null;
         $this->street = $data['street'];
         $this->number = $data['number'];
     }
