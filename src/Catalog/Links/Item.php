@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Kuvardin\DoubleGis\Catalog\Links;
 
+use Kuvardin\DataFilter\DataFilter;
 use Kuvardin\DoubleGis\Catalog\Contacts\Contact;
 use Kuvardin\DoubleGis\Traits\LongId;
 
@@ -55,5 +56,7 @@ class Item
         }
 
         $this->org_id = $data['org_id'] ?? null;
+
+        DataFilter::searchUnknownFields($data, ['id', 'name', 'additional_info', 'contacts', 'org_id']);
     }
 }
