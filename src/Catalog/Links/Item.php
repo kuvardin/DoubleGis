@@ -44,7 +44,7 @@ class Item
     public function __construct(array $data)
     {
         $this->setId($data['id']);
-        $this->name = $data['id'];
+        $this->name = $data['name'];
         $this->additional_info = $data['additional_info'] ?? null;
 
         if (isset($data['contacts'])) {
