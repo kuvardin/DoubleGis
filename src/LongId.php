@@ -30,7 +30,7 @@ class LongId
      */
     public function __construct(string $id)
     {
-        if (!preg_match('|^(\d+)_[a-zA-Z0-9]+$|', $id, $match)) {
+        if (!preg_match('|^([1-9]{1}[0-9]*)(_([a-zA-Z0-9]+))?$|', $id, $match)) {
             throw new Error("Incorrect ID: $id");
         }
 
