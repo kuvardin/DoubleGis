@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Kuvardin\DoubleGis\Catalog\Address\Components;
 
 use Kuvardin\DoubleGis\Catalog\Address\Component;
+use Kuvardin\DoubleGis\LongId;
 
 /**
  * Class StreetNumber
@@ -37,7 +38,7 @@ class StreetNumber extends Component
     public function __construct(array $data)
     {
         parent::__construct($data);
-        $this->street_id = $data['street_id'] ?? null;
+        $this->street_id = isset($data['street_id']) ? new LongId($data['street_id']) : null;
         $this->street = $data['street'];
         $this->number = $data['number'];
     }

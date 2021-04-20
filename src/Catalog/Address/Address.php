@@ -4,8 +4,6 @@ declare(strict_types=1);
 
 namespace Kuvardin\DoubleGis\Catalog\Address;
 
-use Error;
-
 /**
  * Адрес, по которому располагается филиал организации
  *
@@ -66,5 +64,22 @@ class Address
                 $data['components']);
         }
         $this->reg_bc_url = $data['reg_bc_url'] ?? null;
+    }
+
+    /**
+     * @param string $type
+     * @return Component|null
+     */
+    public function getComponent(string $type): ?Component
+    {
+        if (!empty($this->components)) {
+            foreach ($this->components as $component) {
+                if ($component::getType() === $type) {
+                    return $component;
+                }
+            }
+        }
+
+        return null;
     }
 }

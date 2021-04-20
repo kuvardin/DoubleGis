@@ -20,7 +20,7 @@ use Kuvardin\DoubleGis\Catalog\Links\Links;
 use Kuvardin\DoubleGis\Catalog\SearchAttributes;
 use Kuvardin\DoubleGis\Geometry\Geometry;
 use Kuvardin\DoubleGis\Geometry\Point;
-use Kuvardin\DoubleGis\Traits\LongId;
+use Kuvardin\DoubleGis\LongId;
 
 /**
  * Геообъект типа здание
