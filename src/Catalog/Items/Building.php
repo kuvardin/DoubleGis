@@ -30,7 +30,7 @@ use Kuvardin\DoubleGis\Traits\LongId;
  */
 class Building extends Item
 {
-    use LongId;
+    public LongId $id;
 
     /**
      * @var string|null Название дома
@@ -191,7 +191,7 @@ class Building extends Item
     public function __construct(array $data)
     {
         parent::__construct($data);
-        $this->setId($data['id']);
+        $this->id = new LongId($data['id']);
         $this->caption = $data['caption'] ?? null;
         $this->purpose_name = $data['purpose_name'];
         $this->region_id = $data['region_id'] ?? null;

@@ -29,7 +29,7 @@ use Kuvardin\DoubleGis\Catalog\Schedule\Schedule;
 use Kuvardin\DoubleGis\Catalog\SearchAttributes;
 use Kuvardin\DoubleGis\Geometry\Geometry;
 use Kuvardin\DoubleGis\Geometry\Point;
-use Kuvardin\DoubleGis\Traits\LongId;
+use Kuvardin\DoubleGis\LongId;
 
 /**
  * Филиал
@@ -39,7 +39,7 @@ use Kuvardin\DoubleGis\Traits\LongId;
  */
 class Branch extends Item
 {
-    use LongId;
+    public LongId $id;
 
     /**
      * @var NameExtended Составные части наименования организации
@@ -269,7 +269,7 @@ class Branch extends Item
     public function __construct(array $data)
     {
         parent::__construct($data);
-        $this->setId($data['id']);
+        $this->id = new LongId($data['id']);
         $this->name_extended = new Branch\NameExtended($data['name_ex']);
         $this->org = new Organization($data['org']);
         $this->locale = $data['locale'];

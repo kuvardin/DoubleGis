@@ -6,7 +6,7 @@ namespace Kuvardin\DoubleGis\Catalog\Links;
 
 use Kuvardin\DataFilter\DataFilter;
 use Kuvardin\DoubleGis\Catalog\Contacts\Contact;
-use Kuvardin\DoubleGis\Traits\LongId;
+use Kuvardin\DoubleGis\LongId;
 
 /**
  * Краткая информация о связанных объектах
@@ -15,7 +15,7 @@ use Kuvardin\DoubleGis\Traits\LongId;
  */
 class Item
 {
-    use LongId;
+    public LongId $id;
 
     /**
      * @var string Название
@@ -44,7 +44,7 @@ class Item
      */
     public function __construct(array $data)
     {
-        $this->setId($data['id']);
+        $this->id = new LongId($data['id']);
         $this->name = $data['name'];
         $this->additional_info = $data['additional_info'] ?? null;
 

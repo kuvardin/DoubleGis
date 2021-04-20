@@ -2,17 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Kuvardin\DoubleGis\Traits;
+namespace Kuvardin\DoubleGis;
 
 use Error;
 
 /**
- * Trait LongId
+ * Class LongId
  *
- * @package Kuvardin\DoubleGis\Traits
- * @author Maxim Kuvardin <maxim@kuvard.in>
+ * @package Kuvardin\DoubleGis
  */
-trait LongId
+class LongId
 {
     /**
      * @var string Уникальный идентификатор объекта
@@ -25,13 +24,16 @@ trait LongId
     public string $id_full;
 
     /**
+     * LongId constructor.
+     *
      * @param string $id
      */
-    public function setId(string $id): void
+    public function __construct(string $id)
     {
         if (!preg_match('|^(\d+)_[a-zA-Z0-9]+$|', $id, $match)) {
             throw new Error("Incorrect ID: $id");
         }
+
         $this->id = $match[1];
         $this->id_full = $id;
     }

@@ -16,7 +16,7 @@ use Kuvardin\DoubleGis\Catalog\Items\AdmDivision\Review;
 use Kuvardin\DoubleGis\Catalog\SearchAttributes;
 use Kuvardin\DoubleGis\Geometry\Geometry;
 use Kuvardin\DoubleGis\Geometry\Point;
-use Kuvardin\DoubleGis\Traits\LongId;
+use Kuvardin\DoubleGis\LongId;
 
 /**
  * Геообъект типа административная единица
@@ -29,7 +29,7 @@ class AdmDivision extends Item
     /**
      * Идентификатор административной единицы
      */
-    use LongId;
+    public LongId $id;
 
     /**
      * @var string Подтип административной единицы (AdmDivision\Types::*)
@@ -160,7 +160,7 @@ class AdmDivision extends Item
     public function __construct(array $data)
     {
         parent::__construct($data);
-        $this->setId($data['id']);
+        $this->id = new LongId($data['id']);
         $this->subtype = $data['subtype'];
         $this->caption = $data['caption'] ?? null;
         $this->name = $data['name'];

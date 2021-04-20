@@ -15,9 +15,9 @@ use Kuvardin\DoubleGis\Catalog\Address\Component;
 class StreetNumber extends Component
 {
     /**
-     * @var string|null Идентификатор улицы
+     * @var LongId|null
      */
-    public ?string $street_id;
+    public ?LongId $street_id;
 
     /**
      * @var string Название улицы
