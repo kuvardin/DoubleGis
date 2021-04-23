@@ -14,14 +14,14 @@ use Error;
 class LongId
 {
     /**
-     * @var string Уникальный идентификатор объекта
+     * @var string|null Уникальный идентификатор объекта
      */
-    public string $id;
+    public ?string $id;
 
     /**
-     * @var string Полный идентификатор объекта
+     * @var string|null Полный идентификатор объекта
      */
-    public string $id_full;
+    public ?string $id_full;
 
     /**
      * LongId constructor.
@@ -34,7 +34,7 @@ class LongId
             throw new Error("Incorrect ID: $id");
         }
 
-        $this->id = $match[1];
-        $this->id_full = $id;
+        $this->id = $match[1] ?? null;
+        $this->id_full = $id ?? null;
     }
 }
