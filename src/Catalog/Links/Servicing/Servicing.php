@@ -36,7 +36,7 @@ class Servicing
     public function __construct(array $data)
     {
         $this->count = $data['count'];
-        $this->allowed_for_reviews_count = $data['allowed_for_reviews_count'];
+        $this->allowed_for_reviews_count = $data['allowed_for_reviews_count'] ?? null;
         if (isset($data['items'])) {
             $this->items = [];
             foreach ($data['items'] as $item_data) {
