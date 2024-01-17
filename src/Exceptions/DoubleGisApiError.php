@@ -5,15 +5,14 @@ declare(strict_types=1);
 namespace Kuvardin\DoubleGis\Exceptions;
 
 use Exception;
-use Throwable;
 
 /**
- * Class ApiError
+ * Class DoubleGisApiError
  *
  * @package Kuvardin\DoubleGis\Exceptions
  * @author Maxim Kuvardin <maxim@kuvard.in>
  */
-class ApiError extends Exception
+class DoubleGisApiError extends Exception
 {
     public const TYPE_INCORRECT_PARAMS = 'incorrectParams';
     public const TYPE_ITEM_NOT_FOUND = 'itemNotFound';
@@ -33,16 +32,6 @@ class ApiError extends Exception
     {
         parent::__construct($message, 0, null);
         $this->type = $type;
-    }
-
-    /**
-     * @param string $type
-     * @return bool
-     */
-    public static function checkType(string $type): bool
-    {
-        return $type === self::TYPE_INCORRECT_PARAMS ||
-            $type === self::TYPE_ITEM_NOT_FOUND;
     }
 
     /**
